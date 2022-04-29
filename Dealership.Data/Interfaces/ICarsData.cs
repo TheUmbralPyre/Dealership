@@ -1,14 +1,15 @@
 ﻿using Dealership.Data.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Dealership.Data.Interfaces
 {
     public interface ICarsData
     {
-        Car Get(int Id);
-        IEnumerable<Car> GetAll();
-        void Add(Car car);
-        void Update(Car car);
-        void Delete(int id);
+        Task<Car> GetAsync(int Id);
+        Task<IEnumerable<Car>> GetAllAsync();
+        Task AddAsync(Car car);
+        Task UpdateAsync(Car car);
+        Task DeleteAsync(int id);
     }
 }
