@@ -50,6 +50,7 @@ namespace Dealership.Web.Models
         public async Task<IActionResult> Create(Car car)
         {
             await db.AddAsync(car);
+
             return RedirectToAction("Index");
         }
 
