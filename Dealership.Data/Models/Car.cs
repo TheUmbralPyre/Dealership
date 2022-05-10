@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Dealership.Data.Validations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dealership.Data.Models
@@ -15,7 +16,7 @@ namespace Dealership.Data.Models
         Coupe,
         [Display(Name = "Four-Door Coupe")]
         FourDoorCoupe,
-        [Display(Name = "Hatcback")]
+        [Display(Name = "SUV")]
         SUV
     }
 
@@ -23,6 +24,7 @@ namespace Dealership.Data.Models
     {
         Manual,
         Automatic,
+        [Display(Name = "Dual-Clutch")]
         DualClutch,
         CVT
     }
@@ -38,31 +40,33 @@ namespace Dealership.Data.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "This Field Is Required!")]
         [Column(TypeName = "nvarchar(50)")]
+        [Display(Name = "Model")]
+        [Required(ErrorMessage = "This Field Is Required!")]
         [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
         public string ModelName { get; set; }
 
-        [Required(ErrorMessage = "This Field Is Required!")]
         [Column(TypeName = "nvarchar(50)")]
+        [Required(ErrorMessage = "This Field Is Required!")]
         [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
         public string Generation { get; set; }
 
         [Required(ErrorMessage = "This Field Is Required!")]
-        [MaxLength(4, ErrorMessage = "Cannot be Longer than 4 Characters!")]
         public int Year { get; set; }
 
+        [Display(Name = "Body Type")]
         [Required(ErrorMessage = "This Field Is Required!")]
         public BodyType BodyType { get; set; }
 
-        [Required(ErrorMessage = "This Field Is Required!")]
         [Column(TypeName = "nvarchar(50)")]
+        [Required(ErrorMessage = "This Field Is Required!")]
         [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
         public string Color { get; set; }
 
         [Required(ErrorMessage = "This Field Is Required!")]
         public Transmission Transmission { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0} km")]
         [Required(ErrorMessage = "This Field Is Required!")]
         public int Mileage { get; set; }
 
