@@ -1,4 +1,4 @@
-﻿using Dealership.Data.Models;
+﻿using Dealership.Entities.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

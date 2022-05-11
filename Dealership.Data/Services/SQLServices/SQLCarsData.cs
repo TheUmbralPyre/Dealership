@@ -1,5 +1,5 @@
 ﻿using Dealership.Data.Interfaces;
-using Dealership.Data.Models;
+using Dealership.Entities.Models;
 using Dealership.Data.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

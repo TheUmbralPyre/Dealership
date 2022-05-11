@@ -1,8 +1,7 @@
-﻿using Dealership.Data.Validations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Dealership.Data.Models
+namespace Dealership.Entities.Models
 {
     public enum BodyType
     {

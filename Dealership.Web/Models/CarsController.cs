@@ -1,5 +1,5 @@
 ﻿using Dealership.Data.Interfaces;
-using Dealership.Data.Models;
+using Dealership.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

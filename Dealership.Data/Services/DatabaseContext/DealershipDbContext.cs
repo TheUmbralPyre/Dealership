@@ -1,4 +1,4 @@
-﻿using Dealership.Data.Models;
+﻿using Dealership.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dealership.Data.Services.DatabaseContext
