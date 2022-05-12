@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Dealership.Entities.Validations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dealership.Entities.Models
@@ -8,7 +9,8 @@ namespace Dealership.Entities.Models
         Diesel,
         Gasoline,
         Electric,
-        Hybrid
+        Hybrid,
+        Hydrogen
     }
 
     public class Engine
@@ -21,20 +23,26 @@ namespace Dealership.Entities.Models
         public EngineType EngineType { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:F1} Litre")]
-        public double Displacement { get; set; }
+        [ElectricEngineCannotHaveDisplacement]
+        [RequiredDisplacementOnNonElectricEngine("This Field is Required!")]
+        [Range(0.1, 12.7, ErrorMessage = "{0} Must be Between {1} and {2}")]
+        public double? Displacement { get; set; }
 
         [Display(Name = "Horsepower")]
         [DisplayFormat(DataFormatString = "{0} Hp")]
         [Required(ErrorMessage = "This Field Is Required!")]
-        public int HorsePower { get; set; }
+        [Range(1, 1500, ErrorMessage = "{0} Must be Between {1} and {2}")]
+        public int Horsepower { get; set; }
 
         [DisplayFormat(DataFormatString = "{0} Kw")]
         [Required(ErrorMessage = "This Field Is Required!")]
+        [Range(1, 1200, ErrorMessage = "{0} Must be Between {1} and {2}")]
         public int Kilowatts { get; set; }
 
-        [Display(Name = "Newton Meters")]
+        [Display(Name = "Newton-meters")]
         [DisplayFormat(DataFormatString = "{0} Nm")]
         [Required(ErrorMessage = "This Field Is Required!")]
+        [Range(1, 2400, ErrorMessage = "{0} Must be Between {1} and {2}")]
         public int NewtonMeters { get; set; }
 
         [ForeignKey("Car")]

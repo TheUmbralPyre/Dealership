@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Dealership.Entities\Dealership.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

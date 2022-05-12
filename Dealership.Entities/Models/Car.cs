@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dealership.Entities.Models
@@ -72,8 +73,6 @@ namespace Dealership.Entities.Models
         [Required(ErrorMessage = "This Field Is Required!")]
         public Status Status { get; set; }
 
-        #nullable enable
-        public Engine? Engine { get; set; }
-        #nullable disable
+        public Engine Engine { get; set; }
     }
 }

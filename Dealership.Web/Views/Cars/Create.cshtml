@@ -67,19 +67,19 @@
 
                     <div class="form-group">
                         <label asp-for="Engine.EngineType" class="control-label"></label>
-                        <select asp-for="Engine.EngineType" asp-items="Html.GetEnumSelectList<EngineType>()"></select>
+                        <select asp-for="Engine.EngineType" asp-items="Html.GetEnumSelectList<EngineType>()" id="type"></select>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="Engine.Displacement" class="control-label"></label>
-                        <input asp-for="Engine.Displacement" class="form-control" />
-                        <span asp-validation-for="Engine.Displacement" class="text-danger"></span>
+                        <input asp-for="Engine.Displacement" class="form-control"/>
+                        <span asp-validation-for="Engine.Displacement" class="text-danger" id="displacement"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Engine.HorsePower" class="control-label"></label>
-                        <input asp-for="Engine.HorsePower" class="form-control" />
-                        <span asp-validation-for="Engine.HorsePower" class="text-danger"></span>
+                        <label asp-for="Engine.Horsepower" class="control-label"></label>
+                        <input asp-for="Engine.Horsepower" class="form-control" />
+                        <span asp-validation-for="Engine.Horsepower" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">

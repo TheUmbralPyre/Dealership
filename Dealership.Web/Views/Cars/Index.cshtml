@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dealership.Data.Models.Car>
+﻿@model IEnumerable<Dealership.Entities.Models.Car>
 
 <h1>Index</h1>
 
@@ -18,7 +18,7 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Engine.EngineType) @Html.DisplayFor(modelItem => item.Engine.Displacement)  @Html.DisplayFor(modelItem => item.Engine.HorsePower)
+                @Html.DisplayFor(modelItem => item.Engine.EngineType) @Html.DisplayFor(modelItem => item.Engine.Displacement)  @Html.DisplayFor(modelItem => item.Engine.Horsepower)
             </td>
 
             <td>
