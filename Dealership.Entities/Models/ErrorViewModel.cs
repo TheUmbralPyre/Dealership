@@ -1,6 +1,6 @@
 using System;
 
-namespace Dealership.Web.Models
+namespace Dealership.Entities.Models
 {
     public class ErrorViewModel
     {
