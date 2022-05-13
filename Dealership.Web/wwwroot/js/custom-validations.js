@@ -1,5 +1,6 @@
 ﻿const electricEngineNumber = 2;
 
+//#region Electric Engine Cannot Have Displacement
 
 $.validator.addMethod('electricenginecannothavedisplacement', function (value, element, params) {
     if (document.getElementById("type").value == electricEngineNumber && value != "") {
@@ -12,6 +13,10 @@ $.validator.addMethod('electricenginecannothavedisplacement', function (value, e
 
 $.validator.unobtrusive.adapters.addBool("electricenginecannothavedisplacement");
 
+//#endregion 
+
+//#region Non Electric Engine Must Have Displacement
+
 $.validator.addMethod('requireddisplacementonnonelectricengine', function (value, element, params) {
     if (document.getElementById("type").value != electricEngineNumber && value == "") {
         return false;
@@ -22,3 +27,5 @@ $.validator.addMethod('requireddisplacementonnonelectricengine', function (value
 });
 
 $.validator.unobtrusive.adapters.addBool("requireddisplacementonnonelectricengine");
+
+//#endregion 
