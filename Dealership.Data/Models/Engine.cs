@@ -1,8 +1,7 @@
-﻿using Dealership.Entities.Validations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Dealership.Entities.Models
+namespace Dealership.Data.Models
 {
     public enum EngineType
     {
@@ -23,8 +22,8 @@ namespace Dealership.Entities.Models
         public EngineType EngineType { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:F1} Litre")]
-        [ElectricEngineCannotHaveDisplacement]
-        [RequiredDisplacementOnNonElectricEngine("This Field is Required!")]
+        //[ElectricEngineCannotHaveDisplacement]
+        //[RequiredDisplacementOnNonElectricEngine("This Field is Required!")]
         [Range(0.1, 12.7, ErrorMessage = "{0} Must be Between {1} and {2}")]
         public double? Displacement { get; set; }
 

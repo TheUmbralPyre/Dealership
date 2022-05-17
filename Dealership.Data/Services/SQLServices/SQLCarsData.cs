@@ -1,5 +1,5 @@
 ﻿using Dealership.Data.Interfaces;
-using Dealership.Entities.Models;
+using Dealership.Data.Models;
 using Dealership.Data.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -47,6 +47,8 @@ namespace Dealership.Data.Services.SQLServices
         public async Task UpdateAsync(Car carToUpdate)
         {
             db.Cars.Update(carToUpdate);
+            db.Engines.Update(carToUpdate.Engine);
+
             await db.SaveChangesAsync();
         }
     }

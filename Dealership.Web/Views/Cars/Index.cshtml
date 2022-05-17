@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dealership.Entities.Models.Car>
+﻿@model IEnumerable<Dealership.Entities.ViewModels.Cars.CarsIndexViewModel>
 
 <h1>Index</h1>
 
@@ -11,28 +11,30 @@
     <tbody>
 
         @foreach (var item in Model) {
-        <tr>
+            <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.ModelName) @Html.DisplayFor(modelItem => item.Generation)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelName) @Html.DisplayFor(modelItem => item.Generation)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Engine.EngineType) @Html.DisplayFor(modelItem => item.Engine.Displacement)  @Html.DisplayFor(modelItem => item.Engine.Horsepower)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineType)
+                    @Html.DisplayFor(modelItem => item.Displacement) 
+                    @Html.DisplayFor(modelItem => item.Horsepower)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Transmission)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Transmission)
+                </td>
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
 
-        </tr>
-}
+            </tr>
+        }
     </tbody>
 
 </table>

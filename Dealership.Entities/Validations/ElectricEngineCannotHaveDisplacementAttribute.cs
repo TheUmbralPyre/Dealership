@@ -1,4 +1,4 @@
-﻿using Dealership.Entities.Models;
+﻿using Dealership.Data.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 

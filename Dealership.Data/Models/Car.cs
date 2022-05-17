@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Dealership.Entities.Models
+namespace Dealership.Data.Models
 {
     public enum BodyType
     {
@@ -41,7 +40,7 @@ namespace Dealership.Entities.Models
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
-        [Display(Name = "Model")]
+        [Display(Name = "Model", Prompt = "Fuck")]
         [Required(ErrorMessage = "This Field Is Required!")]
         [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
         public string ModelName { get; set; }

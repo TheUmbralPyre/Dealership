@@ -1,11 +1,13 @@
 using Dealership.Data.Interfaces;
 using Dealership.Data.Services.DatabaseContext;
 using Dealership.Data.Services.SQLServices;
+using Dealership.Entities.Profiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
 
 namespace Dealership.Web
 {
@@ -24,6 +26,8 @@ namespace Dealership.Web
             services.AddControllersWithViews();
             services.AddScoped<ICarsData, SQLCarsData>();
             services.AddDbContext<DealershipDbContext>();
+            // Inject Auto Mapper
+            services.AddAutoMapper(typeof(CarsProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
