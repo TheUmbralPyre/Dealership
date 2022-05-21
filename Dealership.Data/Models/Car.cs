@@ -5,17 +5,11 @@ namespace Dealership.Data.Models
 {
     public enum BodyType
     {
-        [Display(Name = "Hatcback")]
         Hatchback,
-        [Display(Name = "Sedan")]
         Sedan,
-        [Display(Name = "Station Wagon")]
         StationWagon,
-        [Display(Name = "Coupe")]
         Coupe,
-        [Display(Name = "Four-Door Coupe")]
         FourDoorCoupe,
-        [Display(Name = "SUV")]
         SUV
     }
 
@@ -23,7 +17,6 @@ namespace Dealership.Data.Models
     {
         Manual,
         Automatic,
-        [Display(Name = "Dual-Clutch")]
         DualClutch,
         CVT
     }
@@ -39,37 +32,34 @@ namespace Dealership.Data.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [Column(TypeName = "nvarchar(50)")]
-        [Display(Name = "Model", Prompt = "Fuck")]
-        [Required(ErrorMessage = "This Field Is Required!")]
-        [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
+        [MaxLength(50)]
         public string ModelName { get; set; }
 
+        [Required]
         [Column(TypeName = "nvarchar(50)")]
-        [Required(ErrorMessage = "This Field Is Required!")]
-        [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
+        [MaxLength(50)]
         public string Generation { get; set; }
 
-        [Required(ErrorMessage = "This Field Is Required!")]
+        [Required]
         public int Year { get; set; }
 
-        [Display(Name = "Body Type")]
-        [Required(ErrorMessage = "This Field Is Required!")]
+        [Required]
         public BodyType BodyType { get; set; }
 
+        [Required]
         [Column(TypeName = "nvarchar(50)")]
-        [Required(ErrorMessage = "This Field Is Required!")]
-        [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
+        [MaxLength(50)]
         public string Color { get; set; }
 
-        [Required(ErrorMessage = "This Field Is Required!")]
+        [Required]
         public Transmission Transmission { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0} km")]
-        [Required(ErrorMessage = "This Field Is Required!")]
+        [Required]
         public int Mileage { get; set; }
 
-        [Required(ErrorMessage = "This Field Is Required!")]
+        [Required]
         public Status Status { get; set; }
 
         public Engine Engine { get; set; }
