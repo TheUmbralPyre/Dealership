@@ -3,7 +3,6 @@ using Dealership.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
-using Dealership.Entities.ViewModels;
 using Dealership.Entities.ViewModels.Cars;
 using AutoMapper;
 
