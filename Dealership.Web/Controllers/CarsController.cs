@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Dealership.Entities.ViewModels.Cars;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dealership.Web.Models
 {
@@ -38,6 +39,7 @@ namespace Dealership.Web.Models
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int Id)
         {
             var car = await db.GetAsync(Id);
@@ -58,6 +60,7 @@ namespace Dealership.Web.Models
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -75,6 +78,7 @@ namespace Dealership.Web.Models
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int Id)
         {
             var car = await db.GetAsync(Id);
