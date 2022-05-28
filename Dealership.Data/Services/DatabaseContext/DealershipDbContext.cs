@@ -1,9 +1,11 @@
 ﻿using Dealership.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dealership.Data.Services.DatabaseContext
 {
-    public class DealershipDbContext : DbContext
+    public class DealershipDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public DbSet<Car> Cars { get; set; }
 
