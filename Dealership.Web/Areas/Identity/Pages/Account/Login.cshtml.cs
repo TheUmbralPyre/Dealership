@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Net.Mail;
 
 namespace Dealership.Web.Areas.Identity.Pages.Account
 {
@@ -44,8 +45,8 @@ namespace Dealership.Web.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [Display(Name = "Email or Username")]
+            public string EmailOrUsername { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -80,9 +81,30 @@ namespace Dealership.Web.Areas.Identity.Pages.Account
         
             if (ModelState.IsValid)
             {
+                // Initialize a Variable and Assign to it the value of the Email Or Username
+                // This Variable Containes Either an Email or a Username
+                var username = Input.EmailOrUsername;
+
+                // If the Username Variable containes an Email...
+                if (IsValidEmail(Input.EmailOrUsername))
+                {
+                    // ...Find if there is a User with the Given Email
+                    var user = await _userManager.FindByEmailAsync(Input.EmailOrUsername);
+
+                    // If such a User exists...
+                    if (user != null)
+                    {
+                        // ...Assign their Username to the Username Variable
+                        username = user.UserName;
+                    }
+                }
+                // Else...The Username Variable containes a Username
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(username, Input.Password
+                    , Input.RememberMe, lockoutOnFailure: false);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -106,6 +128,29 @@ namespace Dealership.Web.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        /// <summary>
+        /// Determines if a Given Email Address is Valid.
+        /// </summary>
+        /// <param name="email">The Given Email Adress.</param>
+        /// <returns>True if The Email is Valid, or False if the Email is Invalid.</returns>
+        public bool IsValidEmail(string email)
+        {
+            // Try to...
+            try
+            {
+                // ...Initialize a MailAddress using the Given Email
+                MailAddress m = new MailAddress(email);
+                // If no Exceptions are Thrown Return True as the Email is Valid
+                return true;
+            }
+            // Catch Format Exceptions...
+            catch (FormatException)
+            {
+                // Return False as the Email is Invalid
+                return false;
+            }
         }
     }
 }
