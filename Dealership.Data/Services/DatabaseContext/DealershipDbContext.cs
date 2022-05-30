@@ -1,11 +1,12 @@
 ﻿using Dealership.Data.Models;
+using Dealership.Data.Models.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dealership.Data.Services.DatabaseContext
 {
-    public class DealershipDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+    public class DealershipDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         /// <summary>
         /// The Schema Name used for Identity Tables.

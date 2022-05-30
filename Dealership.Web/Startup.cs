@@ -1,4 +1,5 @@
 using Dealership.Data.Interfaces;
+using Dealership.Data.Models.IdentityModels;
 using Dealership.Data.Services.DatabaseContext;
 using Dealership.Data.Services.SQLServices;
 using Dealership.Entities.Profiles;
@@ -29,7 +30,7 @@ namespace Dealership.Web
             // Inject Auto Mapper
             services.AddAutoMapper(typeof(CarsProfile));
             // Inject Identity
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<DealershipDbContext>();
             
             services.AddControllersWithViews();
