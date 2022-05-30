@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Dealership.Data.Models.IdentityModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -33,9 +35,20 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            public string Username { get; set; }
+            
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Profile Picture")]
+            public byte[] ProfilePicture { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -43,11 +56,19 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            var firstName = user.FirstName;
+            var lastName = user.LastName;
+            var profilePicture = user.ProfilePicture;
+
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Username = userName,
+                FirstName = firstName,
+                LastName = lastName,
+                ProfilePicture = profilePicture
             };
         }
 
@@ -86,6 +107,39 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+            }
+
+            // Get the User's First Name
+            var firstName = user.FirstName;
+            // If there is a Difference between the First Name in the Database and the First Name in the Model...
+            if (Input.FirstName != firstName)
+            {
+                // Set the User's First Name to the One in the Model
+                user.FirstName = Input.FirstName;
+                // Update the User
+                await _userManager.UpdateAsync(user);
+            }
+
+            // Get the User's Last Name
+            var lastName = user.LastName;
+            // If there is a Difference between the Last Name in the Database and the Last Name in the Model...
+            if (Input.LastName != lastName)
+            {
+                // Set the User's Last Name to the One in the Model
+                user.LastName = Input.LastName;
+                // Update the User
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Request.Form.Files.Count > 0)
+            {
+                IFormFile file = Request.Form.Files.FirstOrDefault();
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    user.ProfilePicture = dataStream.ToArray();
+                }
+                await _userManager.UpdateAsync(user);
             }
 
             await _signInManager.RefreshSignInAsync(user);
