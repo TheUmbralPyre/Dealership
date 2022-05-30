@@ -27,7 +27,7 @@ namespace Dealership.Data.Services.DatabaseContext
             base.OnModelCreating(builder);
 
             // Rename Identity Tables so that they Don't have "AspNet" in their Names
-            builder.Entity<IdentityUser>(entity =>
+            builder.Entity<ApplicationUser>(entity =>
             {
                 entity.ToTable(name: "User", identitySchemaName);
             });
