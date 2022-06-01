@@ -30,6 +30,9 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
+        [TempData]
+        public string UsernameChangeLimitMessage { get; set; }
+
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -109,6 +112,47 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            // If the User's Change Limit is Not Zero...
+            if (user.UsernameChangeLimit > 0)
+            {
+                // If there is a Difference between the Username in the Database and the Username in the Model...
+                if (Input.Username != user.UserName)
+                {
+                    // Initialize a Variable And Assign to it a User WHo has the Same Username
+                    var userNameExists = await _userManager.FindByNameAsync(Input.Username);
+                    // If a User who has the Same Username Exists....
+                    if (userNameExists != null)
+                    {
+                        // Assign a new Message to Status Message
+                        StatusMessage = "User name already taken. Select a different username.";
+                        // Redirect to the Page
+                        return RedirectToPage();
+                    }
+
+                    // Attempt to set the Username and Assign the Result to a Variable
+                    var setUserName = await _userManager.SetUserNameAsync(user, Input.Username);
+
+                    // If the Username Wasn't Succesfully Changed...
+                    if (!setUserName.Succeeded)
+                    {
+                        // Assign a new Message to Status Message
+                        StatusMessage = "Unexpected error when trying to set user name.";
+                        // Redirect to the Page
+                        return RedirectToPage();
+                    }
+                    // If the Username Was Succesfully Changed...
+                    else
+                    {
+                        // Reduce the Amount of Times that the Username can be Chnaged
+                        user.UsernameChangeLimit -= 1;
+                        // Assign a new Message to Username Chnage Limit Message
+                        UsernameChangeLimitMessage = $"You can Change your Username {user.UsernameChangeLimit} more times.";
+                        // Update the User
+                        await _userManager.UpdateAsync(user);
+                    }
+                }
+            }
+
             // Get the User's First Name
             var firstName = user.FirstName;
             // If there is a Difference between the First Name in the Database and the First Name in the Model...
@@ -131,6 +175,7 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
                 await _userManager.UpdateAsync(user);
             }
 
+            // TODO: Using Image Sharp Enhance the Image Experience
             if (Request.Form.Files.Count > 0)
             {
                 IFormFile file = Request.Form.Files.FirstOrDefault();
