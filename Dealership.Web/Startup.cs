@@ -31,6 +31,7 @@ namespace Dealership.Web
             services.AddAutoMapper(typeof(CarsProfile));
             // Inject Identity
             services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<DealershipDbContext>();
             
             services.AddControllersWithViews();
