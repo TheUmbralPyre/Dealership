@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Dealership.Data.Enums;
+using Dealership.Entities.Enums.Identity;
 
 namespace Dealership.Web.Areas.Identity.Pages.Account
 {
@@ -105,6 +104,7 @@ namespace Dealership.Web.Areas.Identity.Pages.Account
 
                     // Add the New User to the Role of Basic
                     await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

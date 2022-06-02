@@ -41,10 +41,10 @@ namespace Dealership.Data.Services.DatabaseContext
                 if (user == null)
                 {
                     await userManager.CreateAsync(superAdmin, "@Ali147852369");
-                    await userManager.AddToRoleAsync(superAdmin, await roleManager.GetRoleNameAsync(new IdentityRole(Roles.SuperAdmin.ToString())));
-                    await userManager.AddToRoleAsync(superAdmin, await roleManager.GetRoleNameAsync(new IdentityRole(Roles.Admin.ToString())));
-                    await userManager.AddToRoleAsync(superAdmin, await roleManager.GetRoleNameAsync(new IdentityRole(Roles.Moderator.ToString())));
-                    await userManager.AddToRoleAsync(superAdmin, await roleManager.GetRoleNameAsync(new IdentityRole(Roles.Basic.ToString())));
+                    await userManager.AddToRoleAsync(superAdmin, Roles.SuperAdmin.ToString());
+                    await userManager.AddToRoleAsync(superAdmin, Roles.Admin.ToString());
+                    await userManager.AddToRoleAsync(superAdmin, Roles.Moderator.ToString());
+                    await userManager.AddToRoleAsync(superAdmin, Roles.Basic.ToString());
                 }
 
             }
