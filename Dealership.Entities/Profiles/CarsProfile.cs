@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Dealership.Data.Models;
+using Dealership.Data.DataModels;
 using Dealership.Entities.ViewModels.Cars;
 
 namespace Dealership.Entities.Profiles

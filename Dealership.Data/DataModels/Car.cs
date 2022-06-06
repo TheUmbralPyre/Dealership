@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Dealership.Data.Models
+namespace Dealership.Data.DataModels
 {
     public enum BodyType
     {

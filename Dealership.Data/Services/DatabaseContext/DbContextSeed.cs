@@ -1,5 +1,5 @@
 ﻿using Dealership.Data.Enums;
-using Dealership.Data.Models.IdentityModels;
+using Dealership.Data.DataModels.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;

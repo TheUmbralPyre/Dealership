@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Dealership.Data.DataModels.IdentityModels;
 using Dealership.Data.Models.IdentityModels;
+using Dealership.Data.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -16,13 +18,19 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IPictureService<ProfilePicture> _profilePictureService;
+        private readonly IMapper _mapper;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IPictureService<ProfilePicture> profilePictureService,
+            IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _profilePictureService = profilePictureService;
+            _mapper = mapper;
         }
 
         public string Username { get; set; }
@@ -61,7 +69,7 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
 
             var firstName = user.FirstName;
             var lastName = user.LastName;
-            var profilePicture = user.ProfilePicture;
+            var profilePicture = user.ProfilePictureIndex;
 
             Username = userName;
 
@@ -175,15 +183,19 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
                 await _userManager.UpdateAsync(user);
             }
 
-            // TODO: Using Image Sharp Enhance the Image Experience
             if (Request.Form.Files.Count > 0)
             {
                 IFormFile file = Request.Form.Files.FirstOrDefault();
                 using (var dataStream = new MemoryStream())
                 {
                     await file.CopyToAsync(dataStream);
-                    user.ProfilePicture = dataStream.ToArray();
+                    var picture = dataStream.ToArray();
+
+                    var profilePicture = _profilePictureService.ConvertPicture(picture);
+
+                    _mapper.Map(profilePicture, user);
                 }
+
                 await _userManager.UpdateAsync(user);
             }
 

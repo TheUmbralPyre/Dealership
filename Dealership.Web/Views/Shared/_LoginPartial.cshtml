@@ -1,5 +1,6 @@
-﻿@using Dealership.Data.Models.IdentityModels
+﻿@using Dealership.Data.DataModels.IdentityModels
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -8,10 +9,10 @@
 {
     <li class="nav-item" style="align-self: center;">
 
-            @if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
+            @if (UserManager.GetUserAsync(User).Result.ProfilePictureNav != null)
             {
-                <img style="width:40px; height:40px; object-fit:cover; border-radius:30px"
-                     src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))">
+                <img style="border-radius:30px"
+                     src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePictureNav))">
             }
 
     </li>

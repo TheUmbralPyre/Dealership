@@ -1,6 +1,8 @@
-using Dealership.Data.Interfaces;
+using Dealership.Data.DataModels.IdentityModels;
 using Dealership.Data.Models.IdentityModels;
+using Dealership.Data.Interfaces;
 using Dealership.Data.Services.DatabaseContext;
+using Dealership.Data.Services.ImageServices;
 using Dealership.Data.Services.SQLServices;
 using Dealership.Entities.Profiles;
 using Microsoft.AspNetCore.Builder;
@@ -27,8 +29,13 @@ namespace Dealership.Web
             services.AddScoped<ICarsData, SQLCarsData>();
             services.AddDbContext<DealershipDbContext>();
 
+            // Inject Profile Picture Service
+            services.AddTransient<IPictureService<ProfilePicture>, ProfilePictureService>();
+
             // Inject Auto Mapper
             services.AddAutoMapper(typeof(CarsProfile));
+            services.AddAutoMapper(typeof(ApplicationUsersProfile));
+
             // Inject Identity
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()

@@ -1,4 +1,4 @@
-using Dealership.Data.Models.IdentityModels;
+using Dealership.Data.DataModels.IdentityModels;
 using Dealership.Data.Services.DatabaseContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
