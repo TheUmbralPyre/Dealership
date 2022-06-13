@@ -17,6 +17,8 @@ namespace Dealership.Data.Services.DatabaseContext
 
         public DbSet<Engine> Engines { get; set; }
 
+        public DbSet<CarForSale> CarsForSale { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Dealership;Trusted_Connection=True;");

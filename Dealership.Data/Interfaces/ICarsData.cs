@@ -1,15 +1,14 @@
-﻿using Dealership.Data.DataModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Dealership.Data.Interfaces
 {
-    public interface ICarsData
+    public interface ISQLData<T>
     {
-        Task<Car> GetAsync(int Id);
-        Task<IEnumerable<Car>> GetAllAsync();
-        Task AddAsync(Car car);
-        Task UpdateAsync(Car car);
+        Task<T> GetAsync(int Id);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
         Task DeleteAsync(int id);
     }
 }

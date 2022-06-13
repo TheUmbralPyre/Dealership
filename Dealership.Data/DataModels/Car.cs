@@ -62,6 +62,9 @@ namespace Dealership.Data.DataModels
         [Required]
         public Status Status { get; set; }
 
+        [Required]
         public Engine Engine { get; set; }
+
+        public virtual CarForSale CarForSale { get; set; }
     }
 }
