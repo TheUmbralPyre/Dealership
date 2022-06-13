@@ -1,12 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dealership.Data.DataModels.IdentityModels
 {
     public class ApplicationUser : IdentityUser
     {
-        // TODO: Add Limits instead of NAVCHAR(MAX)
+        [Column(TypeName = "nvarchar(20)")]
+        [MaxLength(20)]
         public string FirstName { get; set; }
+
+        [Column(TypeName = "nvarchar(20)")]
+        [MaxLength(20)]
         public string LastName { get; set; }
+
         public int UsernameChangeLimit { get; set; } = 10;
 
         public byte[] ProfilePictureOriginal { get; set; }
@@ -16,5 +24,7 @@ namespace Dealership.Data.DataModels.IdentityModels
         public byte[] ProfilePictureIndex { get; set; }
 
         public byte[] ProfilePictureComment { get; set; }
+
+        public virtual IEnumerable<CarForSale> CarsForSale { get; set; }
     }
 }
