@@ -38,8 +38,10 @@ namespace Dealership.Web
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
+                    // Seed Data
                     await DbContextSeed.SeedRolesAsync(roleManager, context);
                     await DbContextSeed.SeedSuperAdminAsync(userManager, roleManager, context);
+                    await DbContextSeed.SeedCarsForSaleAsync(userManager, context);
                 }
                 catch (Exception ex)
                 {
