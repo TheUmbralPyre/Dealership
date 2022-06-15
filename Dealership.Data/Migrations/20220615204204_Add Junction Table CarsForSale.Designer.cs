@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dealership.Data.Migrations
 {
     [DbContext(typeof(DealershipDbContext))]
-    [Migration("20220607142110_Add Junction Table CarsForSale")]
+    [Migration("20220615204204_Add Junction Table CarsForSale")]
     partial class AddJunctionTableCarsForSale
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,16 +65,22 @@ namespace Dealership.Data.Migrations
 
             modelBuilder.Entity("Dealership.Data.DataModels.CarForSale", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.HasKey("ApplicationUserId", "CarId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CarId")
-                        .IsUnique();
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CarId");
 
                     b.ToTable("CarsForSale");
                 });
@@ -132,10 +138,12 @@ namespace Dealership.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -332,14 +340,12 @@ namespace Dealership.Data.Migrations
             modelBuilder.Entity("Dealership.Data.DataModels.CarForSale", b =>
                 {
                     b.HasOne("Dealership.Data.DataModels.IdentityModels.ApplicationUser", "ApplicationUser")
-                        .WithMany("CarsForSale")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Dealership.Data.DataModels.Car", "Car")
-                        .WithOne("CarForSale")
-                        .HasForeignKey("Dealership.Data.DataModels.CarForSale", "CarId")
+                        .WithMany()
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -412,14 +418,8 @@ namespace Dealership.Data.Migrations
 
             modelBuilder.Entity("Dealership.Data.DataModels.Car", b =>
                 {
-                    b.Navigation("CarForSale");
-
-                    b.Navigation("Engine");
-                });
-
-            modelBuilder.Entity("Dealership.Data.DataModels.IdentityModels.ApplicationUser", b =>
-                {
-                    b.Navigation("CarsForSale");
+                    b.Navigation("Engine")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

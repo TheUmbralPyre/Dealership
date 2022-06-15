@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
+using MapsterMapper;
+using Mapster;
 
 namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -193,7 +193,7 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
 
                     var profilePicture = _profilePictureService.ConvertPicture(picture);
 
-                    _mapper.Map(profilePicture, user);
+                    user = profilePicture.Adapt(user, _mapper.Config);
                 }
 
                 await _userManager.UpdateAsync(user);

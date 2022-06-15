@@ -4,36 +4,41 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
 using Dealership.Entities.ViewModels.Cars;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Dealership.Data.DataModels.IdentityModels;
+using MapsterMapper;
+using Mapster;
 
 namespace Dealership.Web.Models
 {
     public class CarsController : Controller
     {
-        ICarsData db = null;
-        IMapper mapper = null;
+        private readonly ISQLData<CarForSale> db = null;
+        private readonly IMapper mapper = null;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public CarsController(ICarsData db, IMapper mapper)
+        public CarsController(ISQLData<CarForSale> db, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             this.db = db;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            var cars = await db.GetAllAsync();
+            var carForSales = await db.GetAllAsync();
 
-            var model = cars.Select(c => mapper.Map<Car, CarsIndexViewModel>(c));
+            var model = carForSales.Select(c => mapper.Map<CarsIndexViewModel>(c));
 
             return View(model);
         }
 
         public async Task<IActionResult> Details(int Id)
         {
-            var car = await db.GetAsync(Id);
+            var carForSale = await db.GetAsync(Id);
 
-            var model = mapper.Map<Car, CarsDetailsViewModel>(car);
+            var model = mapper.Map<CarsDetailsViewModel>(carForSale);
 
             return View(model);
         }
@@ -42,9 +47,9 @@ namespace Dealership.Web.Models
         [Authorize]
         public async Task<IActionResult> Edit(int Id)
         {
-            var car = await db.GetAsync(Id);
+            var carForSale = await db.GetAsync(Id);
 
-            var model = mapper.Map<Car, CarsEditViewModel>(car);
+            var model = mapper.Map<CarsEditViewModel>(carForSale);
 
             return View(model);
         }
@@ -52,10 +57,11 @@ namespace Dealership.Web.Models
         [HttpPost]
         public async Task<IActionResult> Edit(CarsEditViewModel carVm)
         {
-            var car = mapper.Map<CarsEditViewModel, Car>(carVm);
-            car.Engine = mapper.Map<CarsEditViewModel, Engine>(carVm);
+            var carForSale = new CarForSale();
 
-            await db.UpdateAsync(car);
+            carForSale = carVm.Adapt(carForSale, mapper.Config);
+
+            await db.UpdateAsync(carForSale);
             return RedirectToAction("Index");
         }
 
@@ -67,12 +73,20 @@ namespace Dealership.Web.Models
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CarsCreateViewModel carVm)
         {
-            var car = mapper.Map<CarsCreateViewModel, Car>(carVm);
-            car.Engine = mapper.Map<CarsCreateViewModel, Engine>(carVm);
+            var car = mapper.Map<Car>(carVm);
+            car.Engine = mapper.Map<Engine>(carVm);
 
-            await db.AddAsync(car);
+            var carForSale = new CarForSale()
+            {
+                ApplicationUser = userManager.GetUserAsync(User).Result,
+                Car = car,
+                DateAdded = System.DateTime.Now
+            };
+
+            await db.AddAsync(carForSale);
 
             return RedirectToAction("Index");
         }
@@ -81,9 +95,10 @@ namespace Dealership.Web.Models
         [Authorize]
         public async Task<IActionResult> Delete(int Id)
         {
-            var car = await db.GetAsync(Id);
+            var carForSale = await db.GetAsync(Id);
 
-            var model = mapper.Map<Car, CarsDeleteViewModel>(car);
+            var model = mapper.Map<CarsDeleteViewModel>(carForSale);
+
             return View(model);
         }
 

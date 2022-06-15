@@ -34,5 +34,7 @@ namespace Dealership.Entities.ViewModels.Cars
         [Required(ErrorMessage = "This Field Is Required!")]
         [Range(1, 1500, ErrorMessage = "{0} Must be Between {1} and {2}")]
         public int Horsepower { get; set; }
+
+        public string UserName { get; set; }
     }
 }

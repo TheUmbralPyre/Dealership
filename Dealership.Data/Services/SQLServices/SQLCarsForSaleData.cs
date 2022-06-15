@@ -21,6 +21,7 @@ namespace Dealership.Data.Services.SQLServices
             db.Add(carForSale.Car.Engine);
             db.Add(carForSale.Car);
             db.Add(carForSale);
+
             await db.SaveChangesAsync();
         }
 
@@ -30,7 +31,9 @@ namespace Dealership.Data.Services.SQLServices
                 .Include(c => c.Car)
                 .Include(e => e.Car.Engine)
                 .FirstOrDefaultAsync(c => c.Id == Id);
+
             db.CarsForSale.Remove(carToDelete);
+
             await db.SaveChangesAsync();
         }
 
@@ -54,9 +57,8 @@ namespace Dealership.Data.Services.SQLServices
 
         public async Task UpdateAsync(CarForSale carToUpdate)
         {
-            db.CarsForSale.Update(carToUpdate);
-            db.Cars.Update(carToUpdate.Car);
             db.Engines.Update(carToUpdate.Car.Engine);
+            db.Cars.Update(carToUpdate.Car);
 
             await db.SaveChangesAsync();
         }

@@ -1,5 +1,7 @@
 ﻿using Dealership.Data.DataModels.IdentityModels;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dealership.Data.DataModels
 {
@@ -8,10 +10,15 @@ namespace Dealership.Data.DataModels
         [Key]
         public int Id { get; set; }
 
-        public int CarId { get; set; }
-        public string ApplicationUserId { get; set; }
+        public DateTime DateAdded { get; set; }
 
-        public virtual Car Car { get; set; }
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey("Car")]
+        public int CarId { get; set; }
+        public Car Car { get; set; }
+
+
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

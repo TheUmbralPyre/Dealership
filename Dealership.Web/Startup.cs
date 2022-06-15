@@ -4,13 +4,16 @@ using Dealership.Data.Interfaces;
 using Dealership.Data.Services.DatabaseContext;
 using Dealership.Data.Services.ImageServices;
 using Dealership.Data.Services.SQLServices;
-using Dealership.Entities.Profiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Dealership.Data.DataModels;
+using Mapster;
+using MapsterMapper;
+using System.Reflection;
 
 namespace Dealership.Web
 {
@@ -26,15 +29,25 @@ namespace Dealership.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ICarsData, SQLCarsData>();
+            services.AddScoped<ISQLData<CarForSale>, SQLCarsForSaleData>();
             services.AddDbContext<DealershipDbContext>();
 
             // Inject Profile Picture Service
             services.AddTransient<IPictureService<ProfilePicture>, ProfilePictureService>();
 
             // Inject Auto Mapper
-            services.AddAutoMapper(typeof(CarsProfile));
-            services.AddAutoMapper(typeof(ApplicationUsersProfile));
+            //services.AddAutoMapper(typeof(CarsProfile));
+            //services.AddAutoMapper(typeof(ApplicationUsersProfile));
+
+            var config = new TypeAdapterConfig();
+
+            config.Scan(Assembly.Load("Dealership.Entities"));
+
+            // Update View Models And Views
+            // Update All Data Models
+
+            services.AddSingleton(config);
+            services.AddScoped<IMapper, ServiceMapper>();
 
             // Inject Identity
             services.AddDefaultIdentity<ApplicationUser>()
