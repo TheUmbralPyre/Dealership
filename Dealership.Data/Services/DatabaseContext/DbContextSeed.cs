@@ -96,7 +96,8 @@ namespace Dealership.Data.Services.DatabaseContext
                 ApplicationUser = karlJones,
                 Car = golf,
                 DateAdded = DateTime.Now,
-                Decription = "The Infamous 1.9 TDI"
+                Decription = "The Infamous 1.9 TDI",
+                Price = 1900
             };
 
             // Seed Golf Seller and Car For Sale
@@ -156,7 +157,8 @@ namespace Dealership.Data.Services.DatabaseContext
                 ApplicationUser = adamBens,
                 Car = cClass,
                 DateAdded = DateTime.Now,
-                Decription = "C for the S"
+                Decription = "C to S",
+                Price = 4000
             };
 
             // Seed Mercedes Seller and Car For Sale
@@ -216,7 +218,8 @@ namespace Dealership.Data.Services.DatabaseContext
                 ApplicationUser = jaySevenfold,
                 Car = mustang,
                 DateAdded = DateTime.Now,
-                Decription = "Boost The Eco"
+                Decription = "Boost The Eco",
+                Price = 4200
             };
 
             // Seed Mustang Seller and Car For Sale
