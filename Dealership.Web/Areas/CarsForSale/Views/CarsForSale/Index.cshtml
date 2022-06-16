@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Dealership.Entities.ViewModels.Cars.CarsIndexViewModel>
+
+<div class="row gy-4 gx-5">
+
+       @foreach (var item in Model) {
+
+            <div class="col-4">
+
+                <div class="card border-0 text-center">
+
+                    <img src="@item.ThumbnailPath" class="align-self-center rounded img-fluid"/>
+
+                    <div>
+
+                        <h5 class="m-0">@Html.DisplayFor(modelItem => item.Brand) @Html.DisplayFor(modelItem => item.ModelName)</h5>
+
+                        <p>
+                             @Html.DisplayFor(modelItem => item.EngineType)
+                             @Html.DisplayFor(modelItem => item.Displacement) 
+                             @Html.DisplayFor(modelItem => item.Horsepower)
+                        </p>
+
+                    </div>
+
+                    <a asp-action="Details" asp-route-id="@item.Id" class="stretched-link"></a>
+
+                </div>
+
+            </div>
+       }
+
+</div>

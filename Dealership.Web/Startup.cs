@@ -14,6 +14,7 @@ using Dealership.Data.DataModels;
 using Mapster;
 using MapsterMapper;
 using System.Reflection;
+using Dealership.Data.Interfaces.PictureInterfaces;
 
 namespace Dealership.Web
 {
@@ -33,19 +34,14 @@ namespace Dealership.Web
             services.AddDbContext<DealershipDbContext>();
 
             // Inject Profile Picture Service
-            services.AddTransient<IPictureService<ProfilePicture>, ProfilePictureService>();
+            services.AddTransient<IProfilePictureService, ProfilePictureService>();
+            // Inject Car Picture Service
+            services.AddTransient<ICarPicturesService, CarPictureService>();
 
-            // Inject Auto Mapper
-            //services.AddAutoMapper(typeof(CarsProfile));
-            //services.AddAutoMapper(typeof(ApplicationUsersProfile));
-
+            // Create a new Configuration for Mapster
             var config = new TypeAdapterConfig();
-
+            // Scan for Mappings in the Entities Project
             config.Scan(Assembly.Load("Dealership.Entities"));
-
-            // Update View Models And Views
-            // Update All Data Models
-
             services.AddSingleton(config);
             services.AddScoped<IMapper, ServiceMapper>();
 
@@ -83,9 +79,15 @@ namespace Dealership.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "AreaCarsForSale",
+                    areaName: "CarsForSale",
+                    pattern: "{area:exists}/{controller=CarsForSale}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Cars}/{action=Index}/{id?}");
+                    pattern: "{controller=CarsForSale}/{action=Index}/{id?}");
+
                 // Add Support for Razor Pages
                 endpoints.MapRazorPages();
             });

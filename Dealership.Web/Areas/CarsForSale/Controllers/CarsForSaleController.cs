@@ -1,36 +1,46 @@
-﻿using Dealership.Data.Interfaces;
-using Dealership.Data.DataModels;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.Linq;
-using Dealership.Entities.ViewModels.Cars;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Dealership.Data.DataModels.IdentityModels;
-using MapsterMapper;
-using Mapster;
+﻿using Dealership.Data.DataModels;
 using Dealership.Data.DataModels.CarModels;
+using Dealership.Data.DataModels.IdentityModels;
+using Dealership.Data.Interfaces;
+using Dealership.Data.Interfaces.PictureInterfaces;
+using Dealership.Entities.ViewModels.Cars;
+using Mapster;
+using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Dealership.Web.Models
+namespace Dealership.Web.Areas.CarsForSale.Controllers
 {
-    public class CarsController : Controller
+    [Area("CarsForSale")]
+    public class CarsForSaleController : Controller
     {
         private readonly ISQLData<CarForSale> db = null;
         private readonly IMapper mapper = null;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ICarPicturesService carPicturesService;
+        private readonly IWebHostEnvironment hostingEnviroment;
 
-        public CarsController(ISQLData<CarForSale> db, IMapper mapper, UserManager<ApplicationUser> userManager)
+        public CarsForSaleController(ISQLData<CarForSale> db, IMapper mapper,
+            UserManager<ApplicationUser> userManager, ICarPicturesService carPicturesService,
+            IWebHostEnvironment hostingEnviroment)
         {
             this.db = db;
             this.mapper = mapper;
             this.userManager = userManager;
+            this.carPicturesService = carPicturesService;
+            this.hostingEnviroment = hostingEnviroment;
         }
 
         public async Task<IActionResult> Index()
         {
-            var carForSales = await db.GetAllAsync();
+            var carsForSale = await db.GetAllAsync();
 
-            var model = carForSales.Select(c => mapper.Map<CarsIndexViewModel>(c));
+            var model = carsForSale.Select(c => mapper.Map<CarsIndexViewModel>(c));
 
             return View(model);
         }
@@ -78,6 +88,24 @@ namespace Dealership.Web.Models
         public async Task<IActionResult> Create(CarsCreateViewModel carVm)
         {
             var car = mapper.Map<Car>(carVm);
+
+            if (Request.Form.Files.Count > 0)
+            {
+                MemoryStream[] streams = new MemoryStream[Request.Form.Files.Count];
+
+                using (var dataStream = new MemoryStream())
+                {
+                    for (int index = 0; index < Request.Form.Files.Count; index += 1)
+                    {
+                        streams[index] = new MemoryStream();
+                        await Request.Form.Files[index].CopyToAsync(streams[index]);
+                    }
+                }
+
+                car.CarThumbnail = carPicturesService.ConvertToThumbnail(streams[0], hostingEnviroment.WebRootPath);
+                car.CarPictures = carPicturesService.ConvertPictures(streams);
+            }
+
             car.Engine = mapper.Map<Engine>(carVm);
 
             var carForSale = new CarForSale()
@@ -85,7 +113,7 @@ namespace Dealership.Web.Models
                 ApplicationUser = userManager.GetUserAsync(User).Result,
                 Car = car,
                 DateAdded = System.DateTime.Now,
-                Decription = " "
+                Decription = "asa"
             };
 
             await db.AddAsync(carForSale);

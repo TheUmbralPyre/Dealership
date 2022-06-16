@@ -26,8 +26,14 @@
                     <ul class="navbar-nav flex-grow-1 justify-content-center">
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark font-weight-italic" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
+                            <a class="nav-link text-dark font-weight-italic" asp-area="CarsForSale" asp-controller="CarsForSale" asp-action="Index">Cars For Sale</a>
                         </li>
+
+                        @*///// Add Partial View With User and Role Here*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-italic" asp-area="CarsForSale" asp-controller="CarsForSale" asp-action="Create">Sell Car</a>
+                        </li>
+                        @*/////*@
 
                     </ul>
 
