@@ -15,6 +15,12 @@ namespace Dealership.Entities.Enums.Cars
         [Display(Name = "Four-Door Coupe")]
         FourDoorCoupe,
         [Display(Name = "SUV")]
-        SUV
+        SUV,
+        [Display(Name = "Truck")]
+        Truck,
+        [Display(Name = "Pickup")]
+        Pickup,
+        [Display(Name = "Van")]
+        Van
     }
 }

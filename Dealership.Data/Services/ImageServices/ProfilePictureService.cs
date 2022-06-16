@@ -24,14 +24,13 @@ namespace Dealership.Data.Services.ImageServices
             image.Save(memoryStream, format);
             profilePicture.AccountIndex = memoryStream.ToArray();
 
-            // Empty the Memorey Strean
+            // Empty the Memorey Strean After Altering Image
             memoryStream = new MemoryStream();
 
             // Nav Picture
             image.Mutate(i => i.Resize(38, 38));
             image.Save(memoryStream, format);
             profilePicture.Nav = memoryStream.ToArray();
-
 
             return profilePicture;
         }

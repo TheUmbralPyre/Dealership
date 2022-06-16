@@ -71,8 +71,8 @@ namespace Dealership.Data.Services.DatabaseContext
             // Create Car Golf
             var golf = new Car
             {
+                Brand = Brand.Volkswagen,
                 ModelName = "Golf",
-                Generation = "4",
                 BodyType = BodyType.Hatchback,
                 Year = 2002,
                 Color = "Black",
@@ -93,7 +93,8 @@ namespace Dealership.Data.Services.DatabaseContext
             {
                 ApplicationUser = karlJones,
                 Car = golf,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                Decription = "The Infamous 1.9 TDI"
             };
 
             // Seed Golf Seller and Car For Sale
@@ -129,8 +130,8 @@ namespace Dealership.Data.Services.DatabaseContext
             // Create Car Mercedes
             var cClass = new Car
             {
+                Brand = Brand.Mercedes,
                 ModelName = "C-Class",
-                Generation = "W205",
                 BodyType = BodyType.Sedan,
                 Year = 2016,
                 Color = "Silver",
@@ -151,7 +152,8 @@ namespace Dealership.Data.Services.DatabaseContext
             {
                 ApplicationUser = adamBens,
                 Car = cClass,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                Decription = "C for the S"
             };
 
             // Seed Mercedes Seller and Car For Sale
@@ -187,8 +189,8 @@ namespace Dealership.Data.Services.DatabaseContext
             // Create Car Mustang
             var mustang = new Car
             {
+                Brand = Brand.Ford,
                 ModelName = "Mustang",
-                Generation = "Ecoboost",
                 BodyType = BodyType.Coupe,
                 Year = 2019,
                 Color = "Crimson",
@@ -209,7 +211,8 @@ namespace Dealership.Data.Services.DatabaseContext
             {
                 ApplicationUser = JaySevenfold,
                 Car = mustang,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                Decription = "Boost The Eco"
             };
 
             // Seed Mustang Seller and Car For Sale

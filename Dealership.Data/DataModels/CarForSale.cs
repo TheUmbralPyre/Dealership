@@ -12,6 +12,11 @@ namespace Dealership.Data.DataModels
 
         public DateTime DateAdded { get; set; }
 
+        [Required]
+        [Column(TypeName = "nvarchar(250)")]
+        [MaxLength(250)]
+        public string Decription { get; set; }
+
         [ForeignKey("Car")]
         public int CarId { get; set; }
         public Car Car { get; set; }

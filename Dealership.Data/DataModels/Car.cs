@@ -3,6 +3,48 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dealership.Data.DataModels
 {
+    public enum Brand
+    {
+        Volkswagen,
+        Opel,
+        Audi,
+        Mercedes,
+        Smart,
+        BMW,
+        Mini,
+        Porsche,
+        Peugeot,
+        Renault,
+        Citroen,
+        DS,
+        Jaguar,
+        LandRover,
+        Vauxhall,
+        Subaru,
+        Mitsubishi,
+        Nissan,
+        Infiniti,
+        Toyota,
+        Lexus,
+        Suziki,
+        Mazda,
+        Honda,
+        Acura,
+        Ford,
+        Chevrolet,
+        Jeep,
+        GMC,
+        Buick,
+        Dodge,
+        RAM,
+        Cadillac,
+        Lincoln,
+        Chrysler,
+        Tesla,
+        Lucid,
+        Rivian
+    }
+
     public enum BodyType
     {
         Hatchback,
@@ -10,7 +52,10 @@ namespace Dealership.Data.DataModels
         StationWagon,
         Coupe,
         FourDoorCoupe,
-        SUV
+        SUV,
+        Truck,
+        Pickup,
+        Van
     }
 
     public enum Transmission
@@ -21,26 +66,18 @@ namespace Dealership.Data.DataModels
         CVT
     }
 
-    public enum Status
-    {
-        New,
-        Used
-    }
-
     public class Car
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        [Column(TypeName = "nvarchar(50)")]
-        [MaxLength(50)]
-        public string ModelName { get; set; }
+        public Brand Brand { get; set; }
 
         [Required]
         [Column(TypeName = "nvarchar(50)")]
         [MaxLength(50)]
-        public string Generation { get; set; }
+        public string ModelName { get; set; }
 
         [Required]
         public int Year { get; set; }
@@ -58,9 +95,6 @@ namespace Dealership.Data.DataModels
 
         [Required]
         public int Mileage { get; set; }
-
-        [Required]
-        public Status Status { get; set; }
 
         [Required]
         public Engine Engine { get; set; }
