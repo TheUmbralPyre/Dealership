@@ -1,4 +1,5 @@
-﻿using Dealership.Data.DataModels.IdentityModels;
+﻿using Dealership.Data.DataModels.CarModels;
+using Dealership.Data.DataModels.IdentityModels;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
