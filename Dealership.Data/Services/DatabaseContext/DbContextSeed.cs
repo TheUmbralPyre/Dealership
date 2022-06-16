@@ -21,7 +21,7 @@ namespace Dealership.Data.Services.DatabaseContext
 
             context.SaveChanges();
         }
-
+        /// /AREAS AND PERMISSIONS
         public static async Task SeedSuperAdminAsync(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager, DealershipDbContext context)
         {
@@ -119,7 +119,7 @@ namespace Dealership.Data.Services.DatabaseContext
             var adamBens = new ApplicationUser()
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = "a(d)bs",
+                UserName = "adbs",
                 FirstName = "Adam",
                 LastName = "Bens",
                 Email = "benser@gmail.com",
@@ -175,7 +175,7 @@ namespace Dealership.Data.Services.DatabaseContext
 
             // Seed Car For Sale Mustang
             // Create Mustang Seller
-            var JaySevenfold = new ApplicationUser()
+            var jaySevenfold = new ApplicationUser()
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = "Avenged",
@@ -209,20 +209,20 @@ namespace Dealership.Data.Services.DatabaseContext
             // Create Car For Sale
             var mustangForSale = new CarForSale
             {
-                ApplicationUser = JaySevenfold,
+                ApplicationUser = jaySevenfold,
                 Car = mustang,
                 DateAdded = DateTime.Now,
                 Decription = "Boost The Eco"
             };
 
             // Seed Mustang Seller and Car For Sale
-            if (userManager.Users.All(u => u.Id != JaySevenfold.Id))
+            if (userManager.Users.All(u => u.Id != jaySevenfold.Id))
             {
-                var user = await userManager.FindByEmailAsync(JaySevenfold.Email);
+                var user = await userManager.FindByEmailAsync(jaySevenfold.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(JaySevenfold, "@Ali147852369");
-                    await userManager.AddToRoleAsync(JaySevenfold, Roles.Basic.ToString());
+                    await userManager.CreateAsync(jaySevenfold, "@Ali147852369");
+                    await userManager.AddToRoleAsync(jaySevenfold, Roles.Basic.ToString());
 
                     context.Add(mustangForSale.Car.Engine);
                     context.Add(mustangForSale.Car);
