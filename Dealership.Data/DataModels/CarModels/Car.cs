@@ -102,6 +102,11 @@ namespace Dealership.Data.DataModels.CarModels
 
         public IEnumerable<CarPicture> CarPictures { get; set; }
 
+        [Required]
         public CarPictureThumbnail CarThumbnail { get; set; }
+
+        [ForeignKey("CarForSale")]
+        public int CarForSaleId { get; set; }
+        public CarForSale CarForSale { get; set; }
     }
 }

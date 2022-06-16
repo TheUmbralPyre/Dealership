@@ -27,5 +27,7 @@ namespace Dealership.Data.DataModels.IdentityModels
         public byte[] ProfilePictureIndex { get; set; }
 
         public byte[] ProfilePictureComment { get; set; }
+
+        public IEnumerable<CarForSale> CarsForSale { get; set; }
     }
 }

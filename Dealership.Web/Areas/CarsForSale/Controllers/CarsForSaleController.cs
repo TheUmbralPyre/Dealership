@@ -113,7 +113,8 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
                 ApplicationUser = userManager.GetUserAsync(User).Result,
                 Car = car,
                 DateAdded = System.DateTime.Now,
-                Decription = "asa"
+                Decription = "asa",
+                Price = 100
             };
 
             await db.AddAsync(carForSale);

@@ -29,6 +29,18 @@ namespace Dealership.Data.Services.DatabaseContext
         {
             base.OnModelCreating(builder);
 
+            // Allow for Multiple Cascade Paths
+            builder.Entity<Car>()
+                .HasOne(c => c.CarForSale)
+                .WithOne(cs => cs.Car)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<CarForSale>()
+                .HasOne(cs => cs.Car)
+                .WithOne(c => c.CarForSale)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
             // Rename Identity Tables so that they Don't have "AspNet" in their Names
             builder.Entity<ApplicationUser>(entity =>
             {
