@@ -43,6 +43,8 @@ namespace Dealership.Data.Services.SQLServices
                 .Include(c => c.ApplicationUser)
                 .Include(c => c.Car)
                 .ThenInclude(c => c.Engine)
+                .Include(c => c.Car.CarThumbnail)
+                .Include(c => c.Car.CarPictures)
                 .FirstOrDefaultAsync(c => c.Id == Id);
         }
 
@@ -52,6 +54,8 @@ namespace Dealership.Data.Services.SQLServices
                 .Include(c => c.ApplicationUser)
                 .Include(c => c.Car)
                 .ThenInclude(c => c.Engine)
+                .Include(c => c.Car.CarThumbnail)
+                .Include(c => c.Car.CarPictures)
                 .ToListAsync();
         }
 

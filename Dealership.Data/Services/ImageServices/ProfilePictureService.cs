@@ -1,4 +1,4 @@
-﻿using Dealership.Data.Interfaces;
+﻿using Dealership.Data.Interfaces.PictureInterfaces;
 using Dealership.Data.Models.IdentityModels;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Dealership.Data.Services.ImageServices
 {
-    public class ProfilePictureService : IPictureService<ProfilePicture>
+    public class ProfilePictureService : IProfilePictureService
     {
         public ProfilePicture ConvertPicture(byte[] picture)
         {

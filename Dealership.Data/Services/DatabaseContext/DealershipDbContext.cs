@@ -1,4 +1,5 @@
 ﻿using Dealership.Data.DataModels;
+using Dealership.Data.DataModels.CarModels;
 using Dealership.Data.DataModels.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

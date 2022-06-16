@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Dealership.Data.DataModels;
+using Dealership.Data.DataModels.CarModels;
 
 namespace Dealership.Data.Services.DatabaseContext
 {
@@ -85,7 +86,8 @@ namespace Dealership.Data.Services.DatabaseContext
                     Horsepower = 130,
                     Kilowatts = 93,
                     NewtonMeters = 310
-                }
+                },
+                CarThumbnail = new CarPictureThumbnail() { Path = "car-thumbnails/seed/golf.jpeg" }
             };
 
             // Create Car For Sale
@@ -144,7 +146,8 @@ namespace Dealership.Data.Services.DatabaseContext
                     Horsepower = 181,
                     Kilowatts = 135,
                     NewtonMeters = 300
-                }
+                },
+                CarThumbnail = new CarPictureThumbnail() { Path = "car-thumbnails/seed/merc.jpeg" }
             };
 
             // Create Car For Sale
@@ -203,7 +206,8 @@ namespace Dealership.Data.Services.DatabaseContext
                     Horsepower = 310,
                     Kilowatts = 228,
                     NewtonMeters = 476
-                }
+                },
+                CarThumbnail = new CarPictureThumbnail() { Path = "car-thumbnails/seed/mustangEco.jpeg" }
             };
 
             // Create Car For Sale
