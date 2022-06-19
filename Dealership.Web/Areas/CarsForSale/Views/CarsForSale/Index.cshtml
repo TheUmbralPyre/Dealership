@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dealership.Entities.ViewModels.Cars.CarsIndexViewModel>
+﻿@model IEnumerable<Dealership.Entities.ViewModels.CarsForSale.CarsForSaleIndexViewModel>
 
 <div class="row gy-4 gx-5">
 
@@ -8,7 +8,7 @@
 
                 <div class="card border-0 text-center hover-darken">
 
-                    <img src="@item.ThumbnailPath" class="align-self-center rounded img-fluid"/>
+                    <img src="~/@item.ThumbnailPath" class="align-self-center rounded img-fluid"/>
 
                     <div class="d-flex flex-column">
 
@@ -30,5 +30,4 @@
 
             </div>
        }
-
 </div>

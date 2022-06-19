@@ -2,20 +2,20 @@
 using Dealership.Entities.Validations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dealership.Entities.ViewModels.Cars
+namespace Dealership.Entities.ViewModels.CarsForSale
 {
-    public class CarsCreateAndEditViewModel
+    public class CarProperties
     {
+        [Required]
+        public Brand Brand { get; set; }
+
         [Display(Name = "Model")]
         [Required(ErrorMessage = "This Field Is Required!")]
         [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
         public string ModelName { get; set; }
 
         [Required(ErrorMessage = "This Field Is Required!")]
-        [MaxLength(50, ErrorMessage = "Cannot be Longer than 50 Characters!")]
-        public string Generation { get; set; }
-
-        [Required(ErrorMessage = "This Field Is Required!")]
+        [Range(1950, 2024)]
         public int Year { get; set; }
 
         [Display(Name = "Body Type")]
@@ -32,9 +32,6 @@ namespace Dealership.Entities.ViewModels.Cars
         [DisplayFormat(DataFormatString = "{0} km")]
         [Required(ErrorMessage = "This Field Is Required!")]
         public int Mileage { get; set; }
-
-        [Required(ErrorMessage = "This Field Is Required!")]
-        public Status Status { get; set; }
 
         [Display(Name = "Engine Type")]
         [Required(ErrorMessage = "This Field Is Required!")]

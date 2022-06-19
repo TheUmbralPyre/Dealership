@@ -1,4 +1,4 @@
-﻿using Dealership.Entities.ViewModels.Cars;
+﻿using Dealership.Entities.ViewModels.CarsForSale;
 using Dealership.Entities.Enums.Cars;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +14,7 @@ namespace Dealership.Entities.Validations
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var engine = (CarsCreateAndEditViewModel)validationContext.ObjectInstance;
+            var engine = (CarProperties)validationContext.ObjectInstance;
 
             if ( (engine.EngineType == EngineType.Electric && value == null)
                 || (engine.EngineType != EngineType.Electric && value != null))

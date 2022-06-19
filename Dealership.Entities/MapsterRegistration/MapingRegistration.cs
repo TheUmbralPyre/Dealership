@@ -1,7 +1,7 @@
 ﻿using Dealership.Data.DataModels;
 using Dealership.Data.DataModels.IdentityModels;
 using Dealership.Data.Models.IdentityModels;
-using Dealership.Entities.ViewModels.Cars;
+using Dealership.Entities.ViewModels.CarsForSale;
 using Mapster;
 using System;
 using System.Collections.Generic;
@@ -24,11 +24,10 @@ namespace Dealership.Entities.MapsterRegistration
 
             // Map a Car For Sale to a View Model
             config
-                .NewConfig<CarForSale, CarsIndexViewModel>()
+                .NewConfig<CarForSale, CarsForSaleIndexViewModel>()
                 .Map(dest => dest, src => src.ApplicationUser)
                 .Map(dest => dest, src => src.Car)
                 .Map(dest => dest, src => src.Car.Engine)
-                .Map(dest => dest, src => src.Car.CarPictures)
                 .Map(dest => dest.ThumbnailPath, src => src.Car.CarThumbnail.Path);
 
             config

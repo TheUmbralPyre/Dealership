@@ -1,10 +1,11 @@
 ﻿using Dealership.Entities.Enums.Cars;
 using Dealership.Entities.Validations;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dealership.Entities.ViewModels.Cars
+namespace Dealership.Entities.ViewModels.CarsForSale
 {
-    public class CarsDetailsViewModel
+    public class CarsForSaleDetailsViewModel
     {
         [Display(Name = "Model")]
         [Required(ErrorMessage = "This Field Is Required!")]
@@ -61,5 +62,7 @@ namespace Dealership.Entities.ViewModels.Cars
         [Required(ErrorMessage = "This Field Is Required!")]
         [Range(1, 2400, ErrorMessage = "{0} Must be Between {1} and {2}")]
         public int NewtonMeters { get; set; }
+
+        public List<Data.DataModels.CarModels.CarPicture> CarPictures { get; set; }
     }
 }

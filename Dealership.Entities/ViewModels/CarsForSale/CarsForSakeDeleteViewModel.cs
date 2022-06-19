@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Dealership.Entities.ViewModels.Cars
+namespace Dealership.Entities.ViewModels.CarsForSale
 {
-    public class CarsDeleteViewModel
+    public class CarsForSakeDeleteViewModel
     {
         public int Id { get; set; }
 
