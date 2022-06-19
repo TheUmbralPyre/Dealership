@@ -1,4 +1,4 @@
-﻿@model Dealership.Entities.ViewModels.Cars.CarsDetailsViewModel
+﻿@model Dealership.Entities.ViewModels.CarsForSale.CarsForSaleDetailsViewModel
 
 <h1>Details</h1>
 
@@ -6,6 +6,11 @@
 
     <h4>Car</h4>
     <hr />
+
+    @foreach(var picture in Model.CarPictures)
+    {
+        <img src="~/@picture.SlidePath" class="align-self-center rounded img-fluid"/>
+    }
 
     <dl class="row">
 

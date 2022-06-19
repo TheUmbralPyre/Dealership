@@ -88,7 +88,6 @@ namespace Dealership.Web
                     name: "default",
                     pattern: "{controller=CarsForSale}/{action=Index}/{id?}");
 
-                // Add Support for Razor Pages
                 endpoints.MapRazorPages();
             });
         }

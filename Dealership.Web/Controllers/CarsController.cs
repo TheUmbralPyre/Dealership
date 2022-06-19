@@ -3,7 +3,7 @@ using Dealership.Data.DataModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
-using Dealership.Entities.ViewModels.Cars;
+using Dealership.Entities.ViewModels.CarsForSale;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Dealership.Data.DataModels.IdentityModels;
@@ -30,7 +30,7 @@ namespace Dealership.Web.Models
         {
             var carForSales = await db.GetAllAsync();
 
-            var model = carForSales.Select(c => mapper.Map<CarsIndexViewModel>(c));
+            var model = carForSales.Select(c => mapper.Map<CarsForSaleIndexViewModel>(c));
 
             return View(model);
         }
@@ -39,7 +39,7 @@ namespace Dealership.Web.Models
         {
             var carForSale = await db.GetAsync(Id);
 
-            var model = mapper.Map<CarsDetailsViewModel>(carForSale);
+            var model = mapper.Map<CarsForSaleDetailsViewModel>(carForSale);
 
             return View(model);
         }
@@ -50,13 +50,13 @@ namespace Dealership.Web.Models
         {
             var carForSale = await db.GetAsync(Id);
 
-            var model = mapper.Map<CarsEditViewModel>(carForSale);
+            var model = mapper.Map<CarsForSaleEditViewModel>(carForSale);
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(CarsEditViewModel carVm)
+        public async Task<IActionResult> Edit(CarsForSaleEditViewModel carVm)
         {
             var carForSale = new CarForSale();
 
@@ -75,7 +75,7 @@ namespace Dealership.Web.Models
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CarsCreateViewModel carVm)
+        public async Task<IActionResult> Create(CarsForSaleCreateViewModel carVm)
         {
             var car = mapper.Map<Car>(carVm);
             car.Engine = mapper.Map<Engine>(carVm);
@@ -85,7 +85,7 @@ namespace Dealership.Web.Models
                 ApplicationUser = userManager.GetUserAsync(User).Result,
                 Car = car,
                 DateAdded = System.DateTime.Now,
-                Decription = " "
+                Description = " "
             };
 
             await db.AddAsync(carForSale);
@@ -99,13 +99,13 @@ namespace Dealership.Web.Models
         {
             var carForSale = await db.GetAsync(Id);
 
-            var model = mapper.Map<CarsDeleteViewModel>(carForSale);
+            var model = mapper.Map<CarsForSakeDeleteViewModel>(carForSale);
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(CarsDeleteViewModel carVm)
+        public async Task<IActionResult> Delete(CarsForSakeDeleteViewModel carVm)
         {
             await db.DeleteAsync(carVm.Id);
             return RedirectToAction("Index");
