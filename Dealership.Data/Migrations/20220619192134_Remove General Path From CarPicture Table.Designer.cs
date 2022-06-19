@@ -4,14 +4,16 @@ using Dealership.Data.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dealership.Data.Migrations
 {
     [DbContext(typeof(DealershipDbContext))]
-    partial class DealershipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220619192134_Remove General Path From CarPicture Table")]
+    partial class RemoveGeneralPathFromCarPictureTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +37,7 @@ namespace Dealership.Data.Migrations
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Decription")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");

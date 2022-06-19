@@ -96,7 +96,7 @@ namespace Dealership.Data.Services.DatabaseContext
                 ApplicationUser = karlJones,
                 Car = golf,
                 DateAdded = DateTime.Now,
-                Decription = "The Infamous 1.9 TDI",
+                Description = "The Infamous 1.9 TDI",
                 Price = 1900
             };
 
@@ -157,7 +157,7 @@ namespace Dealership.Data.Services.DatabaseContext
                 ApplicationUser = adamBens,
                 Car = cClass,
                 DateAdded = DateTime.Now,
-                Decription = "C to S",
+                Description = "C to S",
                 Price = 4000
             };
 
@@ -218,7 +218,7 @@ namespace Dealership.Data.Services.DatabaseContext
                 ApplicationUser = jaySevenfold,
                 Car = mustang,
                 DateAdded = DateTime.Now,
-                Decription = "Boost The Eco",
+                Description = "Boost The Eco",
                 Price = 4200
             };
 

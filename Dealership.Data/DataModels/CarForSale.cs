@@ -17,9 +17,10 @@ namespace Dealership.Data.DataModels
         [Required]
         [Column(TypeName = "nvarchar(250)")]
         [MaxLength(250)]
-        public string Decription { get; set; }
+        public string Description { get; set; }
 
         [Required]
+        [Range(1, 1000000)]
         public int Price { get; set; }
 
         [ForeignKey("Car")]

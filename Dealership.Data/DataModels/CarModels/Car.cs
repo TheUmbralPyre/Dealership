@@ -81,6 +81,7 @@ namespace Dealership.Data.DataModels.CarModels
         public string ModelName { get; set; }
 
         [Required]
+        [Range(1950, 2024)]
         public int Year { get; set; }
 
         [Required]
@@ -100,7 +101,7 @@ namespace Dealership.Data.DataModels.CarModels
         [Required]
         public Engine Engine { get; set; }
 
-        public IEnumerable<CarPicture> CarPictures { get; set; }
+        public List<CarPicture> CarPictures { get; set; }
 
         [Required]
         public CarPictureThumbnail CarThumbnail { get; set; }
