@@ -6,7 +6,7 @@ namespace Dealership.Data.Interfaces.PictureInterfaces
 {
     public interface ICarPicturesService
     {
-        public IEnumerable<CarPicture> ConvertPictures(IEnumerable<MemoryStream> pictures);
+        public List<CarPicture> ConvertPictures(IEnumerable<MemoryStream> pictures, string webRootPath);
 
         public CarPictureThumbnail ConvertToThumbnail(MemoryStream picture, string webRootPath);
     }

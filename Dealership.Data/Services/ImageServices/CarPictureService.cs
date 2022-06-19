@@ -16,38 +16,60 @@ namespace Dealership.Data.Services.ImageServices
 
         private const string carThumbnailsFolderName = "car-thumbnails";
 
+        private const int slideHeight = 220;
+
+        private const int slideWidth = 380;
+
+        private const string carPicturesFolderName = "car-pictures";
+
         private const string jpegFormatExtension = ".jpeg";
 
         private const int jpegEncoderQuality = 75;
 
-        public IEnumerable<CarPicture> ConvertPictures(IEnumerable<MemoryStream> pictures)
+        public List<CarPicture> ConvertPictures(IEnumerable<MemoryStream> pictures, string webRootPath)
         {
+            // Initialize a New List of Car Pictures to be Returned
             var carPictures = new List<CarPicture>();
 
-            //foreach(var picture in pictures){
+            // For each Picutre in the Recieved Pictures...
+            foreach(var picture in pictures)
+            {
+                // Initialize a New Car Picture
+                var carPicture = new CarPicture();
 
-                //var carPicture = new CarPicture();
+                // Set the Position of the Picture Memory Stream to its Start, so that it can be Loaded
+                picture.Position = 0;
 
-                //picture.Position = 0;
+                // Load the Picture
+                using var imageResult = Image.Load(picture);
 
-                //using var imageResult = Image.Load(picture);
+                // Decalre and Initialize the Pictures Save Path of the Original Picture
+                var savePath = Path.Combine(webRootPath + "\\" + carPicturesFolderName, carPicture.Id.ToString() + "_Original" + jpegFormatExtension);
+                // Set the Path of the Original Picture
+                carPicture.OriginalPath = carPicturesFolderName + "\\" + carPicture.Id.ToString() + "_Original" + jpegFormatExtension;
+                // Save the Original Picture
+                imageResult.Save(savePath, new JpegEncoder
+                {
+                    Quality = jpegEncoderQuality
+                });
 
-                //imageResult.SaveAsJpeg("Original_" + carPicture.Id);
+                // Resize the Picture
+                imageResult.Mutate(i => i.Resize(slideWidth, slideHeight));
+                // Decalre and Initialize the Pictures Save Path of the Slide Picture
+                savePath = Path.Combine(webRootPath + "\\" + carPicturesFolderName, carPicture.Id.ToString() + "_Slide" + jpegFormatExtension);
+                // Save The Path of the Slide Picture
+                carPicture.SlidePath = carPicturesFolderName + "\\" + carPicture.Id.ToString() + "_Slide" + jpegFormatExtension;
+                // Save the Slide Picture
+                imageResult.Save(savePath, new JpegEncoder
+                {
+                    Quality = jpegEncoderQuality
+                });
 
-                //carPicture.Original = "/pictures/" + "Original_" + carPicture.Id + ".jpeg";
+                // Add the Car Picture into the List
+                carPictures.Add(carPicture);
+            }
 
-                //imageResult.Mutate(i => i.Resize(250, 310));
-
-                //imageResult.SaveAsJpeg("Slide_" + carPicture.Id, new JpegEncoder
-                //{
-                    //Quality = 75
-                //});
-
-                //carPicture.Slide = "/pictures/" + "Slide_" + carPicture.Id + ".jpeg";
-
-                //carPictures.Add(carPicture);
-            //}
-
+            // Return the Car Pictures
             return carPictures;
         }
 
