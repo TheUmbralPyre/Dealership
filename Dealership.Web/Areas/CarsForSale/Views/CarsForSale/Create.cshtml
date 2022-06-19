@@ -1,104 +1,89 @@
-﻿@model Dealership.Entities.ViewModels.Cars.CarsCreateViewModel
+﻿@using System.IO
+@model Dealership.Entities.ViewModels.CarsForSale.CarsForSaleCreateViewModel
 
-<h1>Create</h1>
-
-<h4>Car</h4>
-
-<hr />
+<h1>Enter your Car's Information</h1>
 
 <div class="row">
 
-    <div class="col-md-10 col-md-offset-1">
-
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="row">
 
-                <div class="col">
+                <div class="col mx-5">
 
-                    <div class="form-group">
+                    <h2>General</h2>
+
+                    <div class="form-group my-3">
                         <label asp-for="ModelName" class="control-label"></label>
                         <input asp-for="ModelName" class="form-control" />
                         <span asp-validation-for="ModelName" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="Generation" class="control-label"></label>
-                        <input asp-for="Generation" class="form-control" />
-                        <span asp-validation-for="Generation" class="text-danger"></span>
+                    <div class="form-group my-3">
+                        <label asp-for="Brand" class="control-label"></label>
+                        <select asp-for="Brand" asp-items="Html.GetEnumSelectList<Brand>()"></select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="Year" class="control-label"></label>
                         <input asp-for="Year" class="form-control" />
                         <span asp-validation-for="Year" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="BodyType" class="control-label"></label>
                         <select asp-for="BodyType" asp-items="Html.GetEnumSelectList<BodyType>()"></select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="Color" class="control-label"></label>
                         <input asp-for="Color" class="form-control" />
                         <span asp-validation-for="Color" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="Transmission" class="control-label"></label>
                         <select asp-for="Transmission" asp-items="Html.GetEnumSelectList<Transmission>()"></select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="Mileage" class="control-label"></label>
                         <input asp-for="Mileage" class="form-control" />
                         <span asp-validation-for="Mileage" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="Status" class="control-label"></label>
-                        <select asp-for="Status" asp-items="Html.GetEnumSelectList<Status>()"></select>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="file"
-                           accept=".png,.jpg,.jpeg,.tif"
-                           asp-for="Pictures"
-                           class="form-control"
-                           multiple/>
-                    </div>
-
                 </div>
 
-                <div class="col">
+                <div class="col mx-5">
 
-                    <div class="form-group">
+                    <h2>Engine</h2>
+
+                    <div class="form-group my-3">
                         <label asp-for="EngineType" class="control-label"></label>
                         <select asp-for="EngineType" asp-items="Html.GetEnumSelectList<EngineType>()" id="type"></select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="Displacement" class="control-label"></label>
                         <input asp-for="Displacement" class="form-control"/>
                         <span asp-validation-for="Displacement" class="text-danger" id="displacement"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="Horsepower" class="control-label"></label>
                         <input asp-for="Horsepower" class="form-control" />
                         <span asp-validation-for="Horsepower" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="Kilowatts" class="control-label"></label>
                         <input asp-for="Kilowatts" class="form-control" />
                         <span asp-validation-for="Kilowatts" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <label asp-for="NewtonMeters" class="control-label"></label>
                         <input asp-for="NewtonMeters" class="form-control" />
                         <span asp-validation-for="NewtonMeters" class="text-danger"></span>
@@ -108,18 +93,56 @@
 
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group d-flex flex-column align-items-center my-3">
+                <h2 class="m-0 align-self-center">Pictures</h2>
+                <p class="m-0">The First Picture Will Be the Car's Thumbnail</p>
+                <p class="m-0">The Maximum Size a Picture can be is 15 MegaBytes</p>
+                <p class="m-0">The Maximum Number of Pictures You Can Upload is 15</p>
+
+                <div class="form-group">
+                    <input type="file"
+                    accept=".png,.jpg,.jpeg,.tif"
+                    asp-for="Uploads"
+                    class="form-control justify-content-center"
+                    multiple/>
+                </div>
+
+                <span asp-validation-for="Uploads" class="text-danger"></span>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col mx-5">
+
+                    <h2>Description</h2>
+
+                    <div class="form-group my-3">
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger" id="displacement"></span>
+                    </div>
+
+                </div>
+
+                <div class="col mx-5">
+
+                    <h2>Price</h2>
+
+                    <div class="form-group my-3">
+                        <input asp-for="Price" class="form-control"/>
+                        <span asp-validation-for="Price" class="text-danger" id="displacement"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-group d-flex justify-content-center">
+                <input type="submit" value="Publish" class="btn btn-primary" />
             </div>
 
         </form>
 
-    </div>
-
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

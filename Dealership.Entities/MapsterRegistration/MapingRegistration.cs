@@ -31,7 +31,7 @@ namespace Dealership.Entities.MapsterRegistration
                 .Map(dest => dest.ThumbnailPath, src => src.Car.CarThumbnail.Path);
 
             config
-                .NewConfig<CarForSale, CarsDetailsViewModel>()
+                .NewConfig<CarForSale, CarsForSaleDetailsViewModel>()
                 .Map(dest => dest, src => src.ApplicationUser)
                 .Map(dest => dest, src => src.Car)
                 .Map(dest => dest, src => src.Car.Engine)
@@ -39,7 +39,7 @@ namespace Dealership.Entities.MapsterRegistration
                 .Map(dest => dest, src => src.Car.CarThumbnail);
 
             config
-                .NewConfig<CarForSale, CarsEditViewModel>()
+                .NewConfig<CarForSale, CarsForSaleEditViewModel>()
                 .Map(dest => dest, src => src.ApplicationUser)
                 .Map(dest => dest, src => src.Car)
                 .Map(dest => dest, src => src.Car.Engine)
@@ -47,7 +47,7 @@ namespace Dealership.Entities.MapsterRegistration
                 .Map(dest => dest, src => src.Car.CarThumbnail);
 
             config
-                .NewConfig<CarForSale, CarsDeleteViewModel>()
+                .NewConfig<CarForSale, CarsForSakeDeleteViewModel>()
                 .Map(dest => dest, src => src.ApplicationUser)
                 .Map(dest => dest, src => src.Car)
                 .Map(dest => dest, src => src.Car.Engine)
@@ -56,7 +56,7 @@ namespace Dealership.Entities.MapsterRegistration
 
             // Map a View Model to a Car For Sale
             config
-                .NewConfig<CarsEditViewModel, CarForSale>()
+                .NewConfig<CarsForSaleEditViewModel, CarForSale>()
                 .Map(dest => dest.ApplicationUser, src => src)
                 .Map(dest => dest.Car, src => src)
                 .Map(dest => dest.Car.Engine, src => src);

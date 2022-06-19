@@ -126,7 +126,7 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
         {
             var carForSale = await db.GetAsync(Id);
 
-            var model = new CarsDetailsViewModel() { CarPictures = carForSale.Car.CarPictures }; //mapper.Map<CarsDetailsViewModel>(carForSale);
+            var model = new CarsForSaleDetailsViewModel() { CarPictures = carForSale.Car.CarPictures }; //mapper.Map<CarsDetailsViewModel>(carForSale);
 
             return View(model);
         }
@@ -137,13 +137,13 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
         {
             var carForSale = await db.GetAsync(Id);
 
-            var model = mapper.Map<CarsEditViewModel>(carForSale);
+            var model = mapper.Map<CarsForSaleEditViewModel>(carForSale);
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(CarsEditViewModel carVm)
+        public async Task<IActionResult> Edit(CarsForSaleEditViewModel carVm)
         {
             var carForSale = new CarForSale();
 
@@ -159,13 +159,13 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
         {
             var carForSale = await db.GetAsync(Id);
 
-            var model = mapper.Map<CarsDeleteViewModel>(carForSale);
+            var model = mapper.Map<CarsForSakeDeleteViewModel>(carForSale);
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(CarsDeleteViewModel carVm)
+        public async Task<IActionResult> Delete(CarsForSakeDeleteViewModel carVm)
         {
             await db.DeleteAsync(carVm.Id);
             return RedirectToAction("Index");
