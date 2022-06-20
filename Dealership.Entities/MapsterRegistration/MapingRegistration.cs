@@ -17,10 +17,7 @@ namespace Dealership.Entities.MapsterRegistration
         {
             // Map a Profile Picture To an Application User
             config
-                .NewConfig<ProfilePicture, ApplicationUser>()
-                .Map(dest => dest.ProfilePictureNav, src => src.Nav)
-                .Map(dest => dest.ProfilePictureIndex, src => src.AccountIndex)
-                .Map(dest => dest.ProfilePictureOriginal, src => src.Original);
+                .NewConfig<ProfilePicture, ApplicationUser>();
 
             // Map a Car For Sale to a View Model
             config
@@ -35,8 +32,7 @@ namespace Dealership.Entities.MapsterRegistration
                 .Map(dest => dest, src => src.ApplicationUser)
                 .Map(dest => dest, src => src.Car)
                 .Map(dest => dest, src => src.Car.Engine)
-                .Map(dest => dest, src => src.Car.CarPictures)
-                .Map(dest => dest, src => src.Car.CarThumbnail);
+                .Map(dest => dest, src => src.Car.CarPictures);
 
             config
                 .NewConfig<CarForSale, CarsForSaleEditViewModel>()

@@ -20,13 +20,13 @@ namespace Dealership.Data.DataModels.IdentityModels
 
         public DateTime DateJoined { get; set; }
 
-        public byte[] ProfilePictureOriginal { get; set; }
+        public string ProfilePictureOriginalPath { get; set; }
 
-        public byte[] ProfilePictureNav { get; set; }
+        public string ProfilePictureNavbarPath { get; set; }
 
-        public byte[] ProfilePictureIndex { get; set; }
+        public string ProfilePictureManagePath { get; set; }
 
-        public byte[] ProfilePictureComment { get; set; }
+        public string ProfilePictureCommonPath { get; set; }
 
         public IEnumerable<CarForSale> CarsForSale { get; set; }
     }

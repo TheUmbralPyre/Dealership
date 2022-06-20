@@ -3,12 +3,12 @@
     public class ProfilePicture
     {
 
-        public byte[] Original { get; set; }
+        public string ProfilePictureOriginalPath { get; set; }
 
-        public byte[] Nav { get; set; }
+        public string ProfilePictureNavbarPath { get; set; }
 
-        public byte[] AccountIndex { get; set; }
+        public string ProfilePictureManagePath { get; set; }
 
-        public byte[] Comment { get; set; }
+        public string ProfilePictureCommonPath { get; set; }
     }
 }

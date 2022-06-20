@@ -9,10 +9,10 @@
 {
     <li class="nav-item" style="align-self: center;">
 
-            @if (UserManager.GetUserAsync(User).Result != null && UserManager.GetUserAsync(User).Result.ProfilePictureNav != null)
+            @if (UserManager.GetUserAsync(User).Result != null && UserManager.GetUserAsync(User).Result.ProfilePictureNavbarPath != null)
             {
                 <img style="border-radius:100vh;"
-                     src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePictureNav))">
+                     src="~/@UserManager.GetUserAsync(User).Result.ProfilePictureNavbarPath">
             }
 
     </li>

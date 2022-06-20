@@ -4,14 +4,16 @@ using Dealership.Data.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dealership.Data.Migrations
 {
     [DbContext(typeof(DealershipDbContext))]
-    partial class DealershipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220620150257_Increase the Maximum Amount of Characters for the Decription Column")]
+    partial class IncreasetheMaximumAmountofCharactersfortheDecriptionColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,17 +223,17 @@ namespace Dealership.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ProfilePictureCommonPath")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePictureComment")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("ProfilePictureManagePath")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePictureIndex")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("ProfilePictureNavbarPath")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePictureNav")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("ProfilePictureOriginalPath")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePictureOriginal")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

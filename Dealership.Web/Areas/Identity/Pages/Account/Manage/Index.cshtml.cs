@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MapsterMapper;
 using Mapster;
 using Dealership.Data.Interfaces.PictureInterfaces;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -20,16 +21,19 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IProfilePictureService _profilePictureService;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _hostingEnviroment;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IProfilePictureService profilePictureService,
+            IWebHostEnvironment hostingEnviroment,
             IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _profilePictureService = profilePictureService;
+            _hostingEnviroment = hostingEnviroment;
             _mapper = mapper;
         }
 
@@ -59,7 +63,7 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
 
             [Display(Name = "Profile Picture")]
-            public byte[] ProfilePicture { get; set; }
+            public string ProfilePicture { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -69,7 +73,7 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
 
             var firstName = user.FirstName;
             var lastName = user.LastName;
-            var profilePicture = user.ProfilePictureIndex;
+            var profilePicture = user.ProfilePictureManagePath;
 
             Username = userName;
 
@@ -189,9 +193,8 @@ namespace Dealership.Web.Areas.Identity.Pages.Account.Manage
                 using (var dataStream = new MemoryStream())
                 {
                     await file.CopyToAsync(dataStream);
-                    var picture = dataStream.ToArray();
 
-                    var profilePicture = _profilePictureService.ConvertPicture(picture);
+                    var profilePicture = _profilePictureService.ConvertPicture(dataStream, _hostingEnviroment.WebRootPath, user.UserName);
 
                     user = profilePicture.Adapt(user, _mapper.Config);
                 }

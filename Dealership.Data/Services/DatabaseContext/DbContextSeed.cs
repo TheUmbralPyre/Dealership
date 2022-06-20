@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dealership.Data.DataModels;
 using Dealership.Data.DataModels.CarModels;
+using System.IO;
 
 namespace Dealership.Data.Services.DatabaseContext
 {
@@ -34,7 +35,12 @@ namespace Dealership.Data.Services.DatabaseContext
                 LastName = "Optimum",
                 Email = "imperatorOptimum@gmail.com",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumber = "0876323609",
+                PhoneNumberConfirmed = true,
+                ProfilePictureOriginalPath = "profile-pictures\\seed\\ImperatorOptimum_Original.jpeg",
+                ProfilePictureManagePath = "profile-pictures\\seed\\ImperatorOptimum_Manage.jpeg",
+                ProfilePictureNavbarPath = "profile-pictures\\seed\\ImperatorOptimum_Navbar.jpeg",
+                ProfilePictureCommonPath = "profile-pictures\\seed\\ImperatorOptimum_Common.jpeg"
             };
 
             if (userManager.Users.All(u => u.Id != superAdmin.Id))
@@ -66,7 +72,12 @@ namespace Dealership.Data.Services.DatabaseContext
                 LastName = "Jones",
                 Email = "kjones@gmail.com",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumber = "0879432375",
+                PhoneNumberConfirmed = true,
+                ProfilePictureOriginalPath = "profile-pictures\\seed\\Default_Original.jpeg",
+                ProfilePictureManagePath = "profile-pictures\\seed\\Default_Manage.jpeg",
+                ProfilePictureNavbarPath = "profile-pictures\\seed\\Default_Navbar.jpeg",
+                ProfilePictureCommonPath = "profile-pictures\\seed\\Default_Common.jpeg"
             };
 
             // Create Car Golf
@@ -126,8 +137,13 @@ namespace Dealership.Data.Services.DatabaseContext
                 FirstName = "Adam",
                 LastName = "Bens",
                 Email = "benser@gmail.com",
+                PhoneNumber = "0879487321",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumberConfirmed = true,
+                ProfilePictureOriginalPath = "profile-pictures\\seed\\Default_Original.jpeg",
+                ProfilePictureManagePath = "profile-pictures\\seed\\Default_Manage.jpeg",
+                ProfilePictureNavbarPath = "profile-pictures\\seed\\Default_Navbar.jpeg",
+                ProfilePictureCommonPath = "profile-pictures\\seed\\Default_Common.jpeg"
             };
 
             // Create Car Mercedes
@@ -188,7 +204,12 @@ namespace Dealership.Data.Services.DatabaseContext
                 LastName = "Sevenfold",
                 Email = "TheManHanged@gmail.com",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumber = "0812412375",
+                PhoneNumberConfirmed = true,
+                ProfilePictureOriginalPath = "profile-pictures\\seed\\Default_Original.jpeg",
+                ProfilePictureManagePath = "profile-pictures\\seed\\Default_Manage.jpeg",
+                ProfilePictureNavbarPath = "profile-pictures\\seed\\Default_Navbar.jpeg",
+                ProfilePictureCommonPath = "profile-pictures\\seed\\Default_Common.jpeg"
             };
 
             // Create Car Mustang

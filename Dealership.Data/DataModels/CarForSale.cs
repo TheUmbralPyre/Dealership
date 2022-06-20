@@ -15,8 +15,8 @@ namespace Dealership.Data.DataModels
         public DateTime DateAdded { get; set; }
 
         [Required]
-        [Column(TypeName = "nvarchar(250)")]
-        [MaxLength(250)]
+        [Column(TypeName = "nvarchar(2000)")]
+        [MaxLength(2000)]
         public string Description { get; set; }
 
         [Required]

@@ -74,7 +74,7 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
                 return View();
             }
             // If a File is Larger then the Maximum Allowed Size...
-            else if ((Request.Form.Files.Where(i => i.Length > maxAllowedImageSize)).Count() > 0)
+            else if ((Request.Form.Files.Where(i => i.Length > maxAllowedImageSize)).Any())
             {
                 ModelState.AddModelError("Uploads", $"The Maximum File Size for an Image is {maxAllowedImageSize / 1000000} Megabytes!");
                 return View();
@@ -126,7 +126,7 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
         {
             var carForSale = await db.GetAsync(Id);
 
-            var model = new CarsForSaleDetailsViewModel() { CarPictures = carForSale.Car.CarPictures }; //mapper.Map<CarsDetailsViewModel>(carForSale);
+            var model = mapper.Map<CarsForSaleDetailsViewModel>(carForSale);
 
             return View(model);
         }

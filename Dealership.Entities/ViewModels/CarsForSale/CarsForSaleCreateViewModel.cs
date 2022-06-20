@@ -8,7 +8,7 @@ namespace Dealership.Entities.ViewModels.CarsForSale
 
 
         [Required]
-        [MaxLength(250)]
+        [MaxLength(2000)]
         public string Description { get; set; }
 
         [Required]

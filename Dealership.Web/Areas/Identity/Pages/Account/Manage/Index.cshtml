@@ -57,7 +57,7 @@
                     @if (Model.Input.ProfilePicture != null)
                     {
                         <img id="profilePicture" style="width:350px; object-fit:cover;"
-                        src="data:image/*;base64, @(Convert.ToBase64String(Model.Input.ProfilePicture))">
+                        src="~/@Model.Input.ProfilePicture">
                     }
                     else
                     {

@@ -16,9 +16,9 @@ namespace Dealership.Data.Services.ImageServices
 
         private const string carThumbnailsFolderName = "car-thumbnails";
 
-        private const int slideHeight = 220;
+        private const int slideHeight = 559;
 
-        private const int slideWidth = 380;
+        private const int slideWidth = 966;
 
         private const string carPicturesFolderName = "car-pictures";
 
