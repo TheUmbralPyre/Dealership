@@ -29,8 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\car-pictures\" />
-	<Folder Include="wwwroot\car-thumbnails\" />
 	<Folder Include="wwwroot\profile-pictures\" />
   </ItemGroup>
 
