@@ -2,6 +2,7 @@
 using Dealership.Data.DataModels.IdentityModels;
 using Dealership.Data.Models.IdentityModels;
 using Dealership.Entities.ViewModels.CarsForSale;
+using Dealership.Entities.ViewModels.UserRoles;
 using Mapster;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,11 @@ namespace Dealership.Entities.MapsterRegistration
                 .Map(dest => dest.ApplicationUser, src => src)
                 .Map(dest => dest.Car, src => src)
                 .Map(dest => dest.Car.Engine, src => src);
+
+            // Map an Application User to a UserRolesViewModel
+            config
+                .NewConfig<ApplicationUser, UserRolesViewModel>()
+                .Map(dest => dest, src => src);
         }
     }
 }

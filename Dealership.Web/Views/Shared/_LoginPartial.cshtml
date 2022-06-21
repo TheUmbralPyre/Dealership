@@ -7,6 +7,12 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    if ((UserManager.GetRolesAsync(UserManager.GetUserAsync(User).Result).Result).Contains("SuperAdmin"))
+    {
+        <a  class="nav-link bg-warning fw-bold text-light rounded" href="UserRoles"
+            title="User Roles">User Roles</a>
+    }
+
     <li class="nav-item" style="align-self: center;">
 
         <img class="mx-1" style="border-radius:100vh;"

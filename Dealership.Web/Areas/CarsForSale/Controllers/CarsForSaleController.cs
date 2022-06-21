@@ -22,8 +22,8 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
     [Area("CarsForSale")]
     public class CarsForSaleController : Controller
     {
-        private readonly ISQLData<CarForSale> db = null;
-        private readonly IMapper mapper = null;
+        private readonly ISQLData<CarForSale> db;
+        private readonly IMapper mapper;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICarPicturesService carPicturesService;
         private readonly IWebHostEnvironment hostingEnviroment;

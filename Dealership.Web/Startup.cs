@@ -84,9 +84,18 @@ namespace Dealership.Web
                     areaName: "CarsForSale",
                     pattern: "{area:exists}/{controller=CarsForSale}/{action=Index}/{id?}");
 
+                endpoints.MapAreaControllerRoute(
+                    name: "AreaUserRoles",
+                    areaName: "UserRoles",
+                    pattern: "{area:exists}/{controller=UserRoles}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=CarsForSale}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "UserRoles",
+                    pattern: "{controller=UserRoles}/{action=Index}/{id?}");
 
                 endpoints.MapRazorPages();
             });
