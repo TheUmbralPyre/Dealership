@@ -2,9 +2,9 @@
 using Dealership.Entities.Validations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dealership.Entities.ViewModels.CarsForSale
+namespace Dealership.Entities.AbstractClasses.CarsForSale
 {
-    public class CarForSaleProperties
+    public abstract class CarForSaleProperties
     {
         [Required]
         public Brand Brand { get; set; }

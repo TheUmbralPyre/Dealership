@@ -1,7 +1,7 @@
-﻿using Dealership.Entities.ViewModels.CarsForSale;
-using Dealership.Entities.Enums.Cars;
+﻿using Dealership.Entities.Enums.Cars;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using Dealership.Entities.AbstractClasses.CarsForSale;
 
 namespace Dealership.Entities.Validations
 {

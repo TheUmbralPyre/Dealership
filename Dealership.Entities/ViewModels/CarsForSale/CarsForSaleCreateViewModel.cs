@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Dealership.Entities.AbstractClasses.CarsForSale;
 
 namespace Dealership.Entities.ViewModels.CarsForSale
 {

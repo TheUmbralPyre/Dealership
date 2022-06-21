@@ -44,7 +44,7 @@ namespace Dealership.Entities.MapsterRegistration
                 .Map(dest => dest, src => src.Car.CarThumbnail);
 
             config
-                .NewConfig<CarForSale, CarsForSakeDeleteViewModel>()
+                .NewConfig<CarForSale, CarsForSaleDeleteViewModel>()
                 .Map(dest => dest, src => src.ApplicationUser)
                 .Map(dest => dest, src => src.Car)
                 .Map(dest => dest, src => src.Car.Engine)

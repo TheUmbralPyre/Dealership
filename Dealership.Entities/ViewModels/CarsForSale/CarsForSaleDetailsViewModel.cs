@@ -1,7 +1,5 @@
-﻿using Dealership.Entities.Enums.Cars;
-using Dealership.Entities.Validations;
+﻿using Dealership.Entities.AbstractClasses.CarsForSale;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Dealership.Entities.ViewModels.CarsForSale
 {
