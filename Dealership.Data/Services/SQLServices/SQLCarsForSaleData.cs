@@ -19,8 +19,8 @@ namespace Dealership.Data.Services.SQLServices
 
         public async Task AddAsync(CarForSale carForSale)
         {
-            db.Add(carForSale.Car.Engine);
-            db.Add(carForSale.Car);
+            carForSale.Title = carForSale.Car.Brand.ToString() + " " + carForSale.Car.ModelName;
+
             db.Add(carForSale);
 
             await db.SaveChangesAsync();
@@ -107,6 +107,9 @@ namespace Dealership.Data.Services.SQLServices
 
             // Assign the Value of the Updated Car for Sale to the Car For Sale to Update
             carForSaleToUpdate = updatedCarForSale;
+
+            // Update the Title of the Car For Sale
+            carForSaleToUpdate.Title = carForSaleToUpdate.Car.Brand.ToString() + " " + carForSaleToUpdate.Car.ModelName;
 
             await db.SaveChangesAsync();
         }

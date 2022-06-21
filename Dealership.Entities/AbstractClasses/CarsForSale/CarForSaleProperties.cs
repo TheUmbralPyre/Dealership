@@ -29,7 +29,7 @@ namespace Dealership.Entities.AbstractClasses.CarsForSale
         [Required(ErrorMessage = "This Field Is Required!")]
         public Transmission Transmission { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0} km")]
+        [DisplayFormat(DataFormatString = "{0} Miles")]
         [Required(ErrorMessage = "This Field Is Required!")]
         public int Mileage { get; set; }
 

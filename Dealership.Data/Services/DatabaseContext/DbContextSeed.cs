@@ -108,7 +108,8 @@ namespace Dealership.Data.Services.DatabaseContext
                 Car = golf,
                 DateAdded = DateTime.Now,
                 Description = "The Infamous 1.9 TDI",
-                Price = 1900
+                Price = 1900,
+                Title = golf.Brand.ToString() + " " + golf.ModelName
             };
 
             // Seed Golf Seller and Car For Sale
@@ -120,8 +121,6 @@ namespace Dealership.Data.Services.DatabaseContext
                     await userManager.CreateAsync(karlJones, "@Ali147852369");
                     await userManager.AddToRoleAsync(karlJones, Roles.Basic.ToString());
 
-                    context.Add(golfForSale.Car.Engine);
-                    context.Add(golfForSale.Car);
                     context.Add(golfForSale);
                 }
 
@@ -174,7 +173,8 @@ namespace Dealership.Data.Services.DatabaseContext
                 Car = cClass,
                 DateAdded = DateTime.Now,
                 Description = "C to S",
-                Price = 4000
+                Price = 4000,
+                Title = cClass.Brand.ToString() + " " + cClass.ModelName
             };
 
             // Seed Mercedes Seller and Car For Sale
@@ -186,8 +186,6 @@ namespace Dealership.Data.Services.DatabaseContext
                     await userManager.CreateAsync(adamBens, "@Ali147852369");
                     await userManager.AddToRoleAsync(adamBens, Roles.Basic.ToString());
 
-                    context.Add(cClassForSale.Car.Engine);
-                    context.Add(cClassForSale.Car);
                     context.Add(cClassForSale);
                 }
 
@@ -240,7 +238,8 @@ namespace Dealership.Data.Services.DatabaseContext
                 Car = mustang,
                 DateAdded = DateTime.Now,
                 Description = "Boost The Eco",
-                Price = 4200
+                Price = 4200,
+                Title = mustang.Brand.ToString() + " " + mustang.ModelName
             };
 
             // Seed Mustang Seller and Car For Sale
@@ -252,8 +251,6 @@ namespace Dealership.Data.Services.DatabaseContext
                     await userManager.CreateAsync(jaySevenfold, "@Ali147852369");
                     await userManager.AddToRoleAsync(jaySevenfold, Roles.Basic.ToString());
 
-                    context.Add(mustangForSale.Car.Engine);
-                    context.Add(mustangForSale.Car);
                     context.Add(mustangForSale);
                 }
 

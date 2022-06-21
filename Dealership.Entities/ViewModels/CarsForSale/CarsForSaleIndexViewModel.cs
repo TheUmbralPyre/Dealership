@@ -7,11 +7,7 @@ namespace Dealership.Entities.ViewModels.CarsForSale
     {
         public int Id { get; set; }
 
-        public Brand Brand { get; set; }
-
-        [Display(Name = "Model")]
-
-        public string ModelName { get; set; }
+        public string Title { get; set; }
 
         public Transmission Transmission { get; set; }
 

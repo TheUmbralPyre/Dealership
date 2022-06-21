@@ -16,6 +16,8 @@
 
             <div class="container">
 
+                <span class="navbar-brand mb-0 h1">Dealership</span>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,19 +25,35 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex">
 
-                    <ul class="navbar-nav flex-grow-1 justify-content-center">
+                    <ul class="navbar-nav flex-grow-1 justify-content-start">
 
                         <li class="nav-item">
                             <a class="nav-link text-dark font-weight-italic" asp-area="CarsForSale" asp-controller="CarsForSale" asp-action="Index">Cars For Sale</a>
                         </li>
 
                         @*///// Add Partial View With User and Role Here*@
-                        <li class="nav-item">
-                            <a class="nav-link text-dark font-weight-italic" asp-area="CarsForSale" asp-controller="CarsForSale" asp-action="Create">Sell Car</a>
+                        <li class="nav-item bg-dark rounded">
+                            <a class="nav-link text-light font-weight-italic" asp-area="CarsForSale" asp-controller="CarsForSale" asp-action="Create">Sell Car</a>
                         </li>
                         @*/////*@
 
+                            
+
                     </ul>
+
+                    <form asp-area="CarsForSale" asp-controller="CarsForSale" asp-action="Search"
+                          method="post" class="form-inline d-sm-inline-flex flex-grow-1 align-items-center">
+
+                        <div class="d-flex">
+
+                            <input class="form-control mx-1" type="search"
+                                   placeholder="Enter Model or Brand" aria-label="Search"
+                                   id="TitleFilter" name="TitleFilter" data-value="true" value>
+                            <button class="btn btn-outline-dark" type="submit">Search</button>
+
+                        </div>
+
+                    </form>
 
                     <partial name="_LoginPartial" />
 

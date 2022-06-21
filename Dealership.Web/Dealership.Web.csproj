@@ -1,4 +1,4 @@
-<!-- Here is To Your Dogs All -->
+﻿<!-- Here is To You -->
 
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
@@ -26,6 +26,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Dealership.Data\Dealership.Data.csproj" />
     <ProjectReference Include="..\Dealership.Entities\Dealership.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\car-pictures\" />
+	<Folder Include="wwwroot\car-thumbnails\" />
+	<Folder Include="wwwroot\profile-pictures\" />
   </ItemGroup>
 
 </Project>

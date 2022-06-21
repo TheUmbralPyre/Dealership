@@ -3,6 +3,7 @@ using Dealership.Data.DataModels.CarModels;
 using Dealership.Data.DataModels.IdentityModels;
 using Dealership.Data.Interfaces;
 using Dealership.Data.Interfaces.PictureInterfaces;
+using Dealership.Entities.FilterClasses;
 using Dealership.Entities.ViewModels.CarsForSale;
 using Mapster;
 using MapsterMapper;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,6 +39,7 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
             this.hostingEnviroment = hostingEnviroment;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var carsForSale = await db.GetAllAsync();
@@ -45,6 +49,55 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Search(SearchFilter searchFilter)
+        {
+            var carsForSale = await db.GetAllAsync();
+
+            // If a Title Filter has been Entered...
+            if (searchFilter.TitleFilter != null)
+            {
+                // ...Remove the Cars For Sale Where the Title Does Not Contain the Title Filter
+                carsForSale = carsForSale.Where(cfs => cfs.Title.ToLower().Contains(searchFilter.TitleFilter.ToLower()));
+            };
+            // If a Color Filter has been Entered...
+            if (searchFilter.ColorFilter != null)
+            {
+                // ...Remove the Cars For Sale Where the Color Does Not Contain the Color Filter
+                carsForSale = carsForSale.Where(cfs => cfs.Car.Color.ToLower().Contains(searchFilter.ColorFilter.ToLower()));
+            };
+            // If a Body Type Filter has been Entered...
+            if (searchFilter.BodyTypeFilter != null)
+            {
+                // ...Remove the Cars For Sale Where the Body Type is Not Equal to that of the Body Type Filter
+                carsForSale = carsForSale.Where(cfs => (int)cfs.Car.BodyType == (int)searchFilter.BodyTypeFilter);
+            };
+            // If a Transmission Filter has been Entered...
+            if (searchFilter.TransmissionFilter != null)
+            {
+                // ...Remove the Cars For Sale Where the Transmission is Not Equal to that of the Transmission Filter
+                carsForSale = carsForSale.Where(cfs => (int)cfs.Car.Transmission == (int)searchFilter.TransmissionFilter);
+            };
+            // If a Year Minimum Filter Or a Year Maximum Filter Has been Entered...
+            if (searchFilter.YearMinFilter != 0 || searchFilter.YearMaxFilter != 0)
+            {
+                // ...Remove the Cars For Sale Where the Year is Higher than the Year Max Filter Or Lower then the Year Min Filter
+                carsForSale = carsForSale.Where(cfs => searchFilter.YearMinFilter <= cfs.Car.Year && cfs.Car.Year <= searchFilter.YearMaxFilter );
+            }
+            // If a Mileage Minimum Filter Or a Milage Maximum Filter Has been Entered...
+            if (searchFilter.MileageMinFilter != 0 || searchFilter.MileageMaxFilter != 0)
+            {
+                // ...Remove the Cars For Sale Where the Mileage is Higher than the Mileage Max Filter Or Lower then the Mileage Min Filter
+                carsForSale = carsForSale.Where(cfs => searchFilter.MileageMinFilter <= cfs.Car.Mileage && cfs.Car.Mileage <= searchFilter.MileageMaxFilter);
+            }
+
+            var model = carsForSale.Select(c => mapper.Map<CarsForSaleIndexViewModel>(c));
+
+            return View(new Tuple<IEnumerable<CarsForSaleIndexViewModel>, SearchFilter>(model, searchFilter));
+        }
+
+
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int Id)
         {
             var carForSale = await db.GetAsync(Id);

@@ -9,28 +9,26 @@
 {
     <li class="nav-item" style="align-self: center;">
 
-            @if (UserManager.GetUserAsync(User).Result != null && UserManager.GetUserAsync(User).Result.ProfilePictureNavbarPath != null)
-            {
-                <img style="border-radius:100vh;"
-                     src="~/@UserManager.GetUserAsync(User).Result.ProfilePictureNavbarPath">
-            }
+        <img class="mx-1" style="border-radius:100vh;"
+             src="~/@UserManager.GetUserAsync(User).Result.ProfilePictureNavbarPath">
 
     </li>
 
     <li class="nav-item">
 
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index"
+        <a  class="nav-link bg-dark fw-bold text-light rounded" asp-area="Identity" asp-page="/Account/Manage/Index"
             title="Manage">@User.Identity.Name</a>
     
     </li>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    <li class="nav-item mx-2">
+        <a class="nav-link bg-dark fw-bold text-light rounded" asp-area="Identity" asp-page="/Account/Register">Register</a>
     </li>
+
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="nav-link bg-dark fw-bold text-light rounded" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
 </ul>

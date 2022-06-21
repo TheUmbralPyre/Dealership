@@ -12,6 +12,11 @@ namespace Dealership.Data.DataModels
         public int Id { get; set; }
 
         [Required]
+        [Column(TypeName = "nvarchar(70)")]
+        [MaxLength(70)]
+        public string Title { get; set; }
+
+        [Required]
         public DateTime DateAdded { get; set; }
 
         [Required]
