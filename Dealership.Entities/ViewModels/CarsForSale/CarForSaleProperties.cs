@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dealership.Entities.ViewModels.CarsForSale
 {
-    public class CarProperties
+    public class CarForSaleProperties
     {
         [Required]
         public Brand Brand { get; set; }
@@ -58,5 +58,16 @@ namespace Dealership.Entities.ViewModels.CarsForSale
         [Required(ErrorMessage = "This Field Is Required!")]
         [Range(1, 2400, ErrorMessage = "{0} Must be Between {1} and {2}")]
         public int NewtonMeters { get; set; }
+
+        [Required]
+        [MaxLength(2000)]
+        public string Description { get; set; }
+
+        [DisplayFormat(DataFormatString = "${0}")]
+        [Required]
+        [Range(1, 1000000)]
+        public int Price { get; set; }
+
+        public string Uploads { get; set; }
     }
 }

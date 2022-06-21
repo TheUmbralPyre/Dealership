@@ -4,6 +4,7 @@ using Dealership.Data.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Dealership.Data.Services.SQLServices
 {
@@ -59,10 +60,53 @@ namespace Dealership.Data.Services.SQLServices
                 .ToListAsync();
         }
 
-        public async Task UpdateAsync(CarForSale carToUpdate)
+        public async Task UpdateAsync(CarForSale updatedCarForSale)
         {
-            db.Engines.Update(carToUpdate.Car.Engine);
-            db.Cars.Update(carToUpdate.Car);
+            // Get the Car For Sale to Update
+            var carForSaleToUpdate = await GetAsync(updatedCarForSale.Id);
+
+            // If there is a Difference between the Car Thumbnails...
+            if (carForSaleToUpdate.Car.CarThumbnail != updatedCarForSale.Car.CarThumbnail)
+            {
+                // Get the Old Thumbnail
+                var oldThumbnail = db.CarPictureThumbnails.FirstOrDefault(cpt => cpt.Id == carForSaleToUpdate.Car.CarThumbnail.Id);
+
+                // Remove the Old Thumbnail from the Database
+                db.Remove(oldThumbnail);
+
+                // Get the New Thumbnail
+                updatedCarForSale.Car.CarThumbnail.Car = carForSaleToUpdate.Car;
+
+                // Add the New Thumbnail to the Database
+                db.Add(updatedCarForSale.Car.CarThumbnail);
+            }
+
+            // If there is a Difference between the Car Pictures...
+            if (carForSaleToUpdate.Car.CarPictures != updatedCarForSale.Car.CarPictures)
+            {
+                // Get the Old Pictures
+                var oldPictures = db.CarPictures.Where(cp => cp.CarId == carForSaleToUpdate.Car.Id).ToList();
+
+                // For each Picture in the Old Pictures...
+                foreach(var picture in oldPictures)
+                {
+                    // Remove the Old Picture from the Database
+                    db.Remove(picture);
+                }
+
+                // For each Picture in the New Pictures...
+                foreach (var picture in updatedCarForSale.Car.CarPictures)
+                {
+                    // Set the Parent of the New Picture to the Car
+                    picture.Car = carForSaleToUpdate.Car;
+
+                    // Add the new Picture to the Database
+                    db.Add(picture);
+                }
+            }
+
+            // Assign the Value of the Updated Car for Sale to the Car For Sale to Update
+            carForSaleToUpdate = updatedCarForSale;
 
             await db.SaveChangesAsync();
         }

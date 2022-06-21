@@ -145,9 +145,51 @@ namespace Dealership.Web.Areas.CarsForSale.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(CarsForSaleEditViewModel carVm)
         {
+            var originalCarForSale = await db.GetAsync(carVm.Id);
+
             var carForSale = new CarForSale();
 
             carForSale = carVm.Adapt(carForSale, mapper.Config);
+
+            const int maxAllowedImageSize = 15000000;
+            const int maxNumberOfImages = 15;
+
+            // If new Pictures have been Submited...
+            if (Request.Form.Files.Count > 0)
+            {
+                // If the Request Files are More than the Maximum Number of Images...
+                if (Request.Form.Files.Count > maxNumberOfImages)
+                {
+                    ModelState.AddModelError("Uploads", $"Only {maxNumberOfImages} Pictures Can be Uploaded!");
+                    return View();
+                }
+                // If a File is Larger then the Maximum Allowed Size...
+                else if ((Request.Form.Files.Where(i => i.Length > maxAllowedImageSize)).Any())
+                {
+                    ModelState.AddModelError("Uploads", $"The Maximum File Size for an Image is {maxAllowedImageSize / 1000000} Megabytes!");
+                    return View();
+                }
+
+                // Initialize an Array of Memory Streams to be Passed as a Parameter
+                MemoryStream[] pictureStreams = new MemoryStream[Request.Form.Files.Count];
+
+                using (var dataStream = new MemoryStream())
+                {
+                    // For each Picture...
+                    for (int index = 0; index < Request.Form.Files.Count; index += 1)
+                    {
+                        // Initialize the Memory Stream at the Index
+                        pictureStreams[index] = new MemoryStream();
+                        // Copy the Picture Stream to the Memory Stream at the Index
+                        await Request.Form.Files[index].CopyToAsync(pictureStreams[index]);
+                    }
+                }
+
+                // Set the Thumbnail Property of the Car to the Returned Value of the Convert To Thumbnail Method
+                carForSale.Car.CarThumbnail = carPicturesService.ConvertToThumbnail(pictureStreams[0], hostingEnviroment.WebRootPath);
+                // Set the Pictures Property of the Car to the Returned Value of the Convert To Pictures Method
+                carForSale.Car.CarPictures = carPicturesService.ConvertPictures(pictureStreams, hostingEnviroment.WebRootPath);
+            }
 
             await db.UpdateAsync(carForSale);
             return RedirectToAction("Index");

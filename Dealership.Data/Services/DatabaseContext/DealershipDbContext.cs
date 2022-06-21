@@ -20,6 +20,10 @@ namespace Dealership.Data.Services.DatabaseContext
 
         public DbSet<CarForSale> CarsForSale { get; set; }
 
+        public DbSet<CarPicture> CarPictures { get; set; }
+
+        public DbSet<CarPictureThumbnail> CarPictureThumbnails { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Dealership;Trusted_Connection=True;");

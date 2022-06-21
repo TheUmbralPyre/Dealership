@@ -5,14 +5,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dealership.Entities.ViewModels.CarsForSale
 {
-    public class CarsForSaleDetailsViewModel : CarProperties
+    public class CarsForSaleDetailsViewModel : CarForSaleProperties
     {
+        public int Id { get; set; }
+
         public List<CarPictureViewModel> CarPictures { get; set; }
-
-        public string Description { get; set; }
-
-        [DisplayFormat(DataFormatString = "${0}")]
-        public int Price { get; set; }
 
         public string UserName { get; set; }
 
@@ -21,6 +18,12 @@ namespace Dealership.Entities.ViewModels.CarsForSale
         public string PhoneNumber { get; set; }
 
         public string ProfilePictureCommonPath { get; set; }
+
+        public string SellerId { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
     }
 }

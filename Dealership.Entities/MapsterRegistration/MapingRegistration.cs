@@ -30,6 +30,7 @@ namespace Dealership.Entities.MapsterRegistration
             config
                 .NewConfig<CarForSale, CarsForSaleDetailsViewModel>()
                 .Map(dest => dest, src => src.ApplicationUser)
+                .Map(dest => dest.SellerId, src => src.ApplicationUserId)
                 .Map(dest => dest, src => src.Car)
                 .Map(dest => dest, src => src.Car.Engine)
                 .Map(dest => dest, src => src.Car.CarPictures);

@@ -1,4 +1,9 @@
-﻿@model Dealership.Entities.ViewModels.CarsForSale.CarsForSaleDetailsViewModel
+﻿@using Dealership.Data.DataModels.IdentityModels
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model Dealership.Entities.ViewModels.CarsForSale.CarsForSaleDetailsViewModel
 
 <div class="gy-5 gx-5">
 
@@ -159,9 +164,10 @@
 
                 <img style="border-radius: 100vw; width: 75px"
                      src="~/@Model.ProfilePictureCommonPath">
-                <lable>@Html.DisplayFor(model => model.UserName)</lable>
-                <lable>@Html.DisplayFor(model => model.Email)</lable>
-                <lable>@Html.DisplayFor(model => model.PhoneNumber)</lable>
+                <h6>@Html.DisplayFor(model => model.UserName)</h6>
+                <lable class="fst-italic">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</lable>
+                <lable class="fst-italic">@Html.DisplayFor(model => model.Email)</lable>
+                <lable class="fst-italic">@Html.DisplayFor(model => model.PhoneNumber)</lable>
 
             </div>
             
@@ -169,5 +175,18 @@
         </div>
 
     </div>
+
+
+    @if (SignInManager.IsSignedIn(User))
+{
+        
+        var user = UserManager.GetUserAsync(User).Result;
+        var userRoles = UserManager.GetRolesAsync(user).Result;
+        @if (user.Id == Model.SellerId || (userRoles.Contains("SuperAdmin") || userRoles.Contains("Admin") || userRoles.Contains("Moderator")))
+        {
+            <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        }
+}
 
 </div>

@@ -2,17 +2,8 @@
 
 namespace Dealership.Entities.ViewModels.CarsForSale
 {
-    public class CarsForSaleCreateViewModel : CarProperties
+    public class CarsForSaleCreateViewModel : CarForSaleProperties
     {
-        public string Uploads { get; set; }
 
-
-        [Required]
-        [MaxLength(2000)]
-        public string Description { get; set; }
-
-        [Required]
-        [Range(1, 1000000)]
-        public int Price { get; set; }
     }
 }

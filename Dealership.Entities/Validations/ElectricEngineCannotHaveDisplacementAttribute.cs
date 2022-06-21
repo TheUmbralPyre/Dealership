@@ -16,7 +16,7 @@ namespace Dealership.Entities.Validations
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var engine = (CarProperties)validationContext.ObjectInstance;
+            var engine = (CarForSaleProperties)validationContext.ObjectInstance;
 
             if (engine.EngineType == EngineType.Electric && engine.Displacement != null)
             {
